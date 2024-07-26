@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>年会抽奖案例</title>
+    <!-- 
+        需求: 从数组随机抽取一等奖、二等奖和三等奖，显示到对应的标签里面
+        分析: ①声明数组: const personAll = ['周杰伦','刘德华','周星驰','小牟同学','Pink老师']
+              ②一等奖: 随机生成一个数字(0-数组长度)，找到对应数组的名字
+              ③通过innerText或者innerHTML将名字写入元素内部
+     -->
+    <style>
+        .box {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            align-content: center;
+            width: 500px;
+            height: 500px;
+            margin: 100px auto;
+            background-color: pink;
+            text-align: center;
+
+        }
+        .box span {
+            display: block;
+            width: 400px;
+            height: 50px;
+            line-height: 50px;
+            background-color: blue;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <span>一等奖</span>
+        <span>二等奖</span>
+        <span>三等奖</span>
+    </div>
+    <script>
+        const personAll = ['周杰伦', '刘德华', '周星驰', '小牟同学', 'Pink老师']
+        const spanAll = document.querySelectorAll('.box span') 
+        for(let i = 0; i < spanAll.length; i++) {
+            // 每次循环随机生成一个[0,peesonAll.length-1]之间的整数
+            let n = Math.floor(Math.random() * personAll.length)
+            spanAll[i].innerHTML = `${i+1}等奖是:${personAll[n]}`
+            personAll.splice(n,1)
+        }
+    </script>
+</body>
+</html>

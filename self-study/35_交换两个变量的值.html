@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交换两个变量的值</title>
+    <script>
+        var a = 1,b = 2;
+        // 方法1:引入一个临时变量temp
+        /* var temp;
+        temp = a;
+        a = b;
+        b = temp;
+        console.log(a);
+        console.log(b); */
+        // 方法2:不用引入新变量
+        a = a+b-(b=a);
+        console.log(a);
+        console.log(b);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

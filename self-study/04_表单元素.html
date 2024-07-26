@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单元素</title>
+    <!-- 
+        表单元素：
+        1.input输入表单元素
+        2.select下拉表单元素
+        3.textarea文本域元素
+     -->
+</head>
+<body>
+    <form action="">
+    <!-- text 文本框 用户可以在里面输入任何文字 -->
+    <!-- 
+        1.label标签是定义标签，用于绑定一个表单元素，当点击label标签内的文本时，浏览器就会自动选择对应的表单元素上，用来增加用户体验
+        2.核心：label标签的for属性应与对应元素的id属性一致
+    -->
+    <label for="username">用户名：</label>
+    <!-- placeholder属性为提示，不占文本框内容 -->
+    <input type="text" name="username" value="" maxlength="4" id="username" placeholder="请输入用户名"> <br>
+    <!-- password 密码框 用户看不见输入的密码 -->
+    <label for="psw">密码：</label>
+    <!-- required属性：该项为必填项，不填会有提示 -->
+    <input type="password" name="psw" id="psw" required> <br>
+    <!-- radio 单选按钮 可以实现多选一 -->
+    <!-- name 是表单元素名字 这里性别单选按钮必须有相同的name 才可以实现多选一 -->
+    <!-- 单选按钮和复选框可以设置checked属性,当页面打开时默认选中这个按钮 -->
+    性别:男<input type="radio" name="sex" value="男" checked> 女<input type="radio" name="sex" value="女"> <br>
+    <!-- checkbox 复选框 可以实现多选 -->
+    爱好:吃饭<input type="checkbox" name="hobby" value="吃饭" checked> 睡觉<input type="checkbox" name="hobby" value="睡觉">打豆豆<input type="checkbox" name="hobby" value="打豆豆"> <br>
+    <!-- 点击提交按钮，可以把表单域form里面的表单元素里面的值提交给后台服务器 -->
+    <input type="submit"> 
+    <!-- 重置按钮可以还原表单元素初始的默认状态 -->
+    <input type="reset"> <br>
+    <!-- 普通按钮 button 后期结合js使用 -->
+    <input type="button" value="获取短信验证码"><br>
+    <!-- 文件域 使用场景 上传文件时使用 -->
+    上传头像：<input type="file"> <br>
+    <!-- 
+        1.select标签是一个下拉表单，里面至少有一对option
+        2.在option里定义selected,当前项为默认选中项
+     -->
+    籍贯：
+    <select name="jiguan" id="jiguan">
+        <option value="河南">河南</option>
+        <option value="北京" selected >北京</option>
+        <option value="上海">上海</option>
+        <option value="山东">山东</option>
+        <option value="河北">河北</option>
+    </select> <br>
+    <!-- 
+        textarea文本域元素：
+        1.cols:一行显示多少字，rows:显示多少行（不重要，了解）
+     -->
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    </form>
+</body>
+</html>

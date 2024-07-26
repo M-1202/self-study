@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM操作元素</title>
+    <style>
+        .box1 {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+
+        .box2 {
+            /* 父级设置相对定位 */
+            position: relative;
+            width: 500px;
+            height: 750px;
+            margin: 100px auto;
+        }
+
+        .box2 img {
+            width: 100%;
+        }
+
+        .close {
+            border: 1px solid red;
+            position: absolute;
+            top: 0;
+            left: -15px;
+            width: 13px;
+            height: 20px;
+            text-align: center;
+            /* 移动到此处鼠标变小手 */
+            cursor: pointer;
+        }
+
+        .anli2 {
+            color: #999;
+        }
+
+        .box3 {
+            width: 200px;
+            height: 200px;
+            background-color: purple;
+        }
+
+        .box4 {
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            margin: 100px auto;
+        }
+
+        .anli3 {
+            width: 600px;
+            margin: 100px auto;
+        }
+
+        .message {
+            display: inline-block;
+            font-size: 12px;
+            color: #999;
+            background: url(img/tishifu.png) no-repeat left center;
+            padding-left: 20px;
+        }
+        .wrong {
+            color: red;
+            background-image: url(img/wrong.png);
+        }
+        .right {
+            color: green;
+            background-image: url(img/right.png);
+        }
+    </style>
+</head>
+
+<body>
+    <button>按钮</button>
+    <input type="text" value="输入内容">
+    <div class="box1"></div>
+    <div class="box2">
+        <!-- IU照片 -->
+        <img src="img/IU.jpg" alt="图片加载失败">
+        <!-- ×字符 -->
+        <i class="close">x</i>
+    </div>
+    <input type="text" value="手机" class="anli2">
+    <div class="box3">修改盒子样式</div>
+    <div class="anli3">
+        <input type="password" class="ipt">
+        <p class="message">请输入6-16位密码</p>
+    </div>
+    <script>
+        // 1. 修改表单属性
+        var btn = document.querySelector('button');
+        var input = document.querySelector('input');
+        // 点击按钮 表单元素变化
+        btn.onclick = function () {
+            // valu 修改表单的属性
+            input.value = '我是大帅哥';
+            // 如果想要表单被禁用,点击过不能再被点击 disabled 为true
+            // this 指向的是事件函数的调用者 btn
+            this.disabled = 'true';
+        }
+        // 2. 样式属性操作
+        // 我们可以通过js修改元素的大小、颜色、位置等样式       element.style 行内样式操作  element.className 类名样式操作
+        // 注意: 1.js里面的样式采取驼峰命名法 比如 fontSize     2.js修改style样式操作,产生的是行内样式,css权重比较高
+        // 使用 element.style 行内样式操作
+        var div = document.querySelector('div');
+        div.onclick = function () {
+            this.style.backgroundColor = 'blue';
+        }
+        // 案例1 仿淘宝关闭二维码
+        var box2 = document.querySelector('.box2');
+        var close = document.querySelector('.close');
+        close.onclick = function () {
+            box2.style.display = 'none';
+        }
+        // 案例2 显示隐藏文本框内容
+        // 获取元素
+        var anli2 = document.querySelector('.anli2');
+        // 注册事件 获得焦点事件 onfocus
+        anli2.onfocus = function () {
+            if (this.value === '手机') {
+                this.value = '';
+            }
+            // 获得焦点需要把文本框里面的文字颜色变深
+            this.style.color = '#333';
+        }
+        // 注册事件 失去焦点事件 onblur
+        anli2.onblur = function () {
+            if (this.value === '') {
+                this.value = '手机';
+            }
+            // 获得焦点需要把文本框里面的文字颜色变浅
+            this.style.color = '#999';
+        }
+        // 使用 element.className 类名样式操作
+        // 先在css中新加一个类的样式 需要改变时 把原本的类名直接改为新加需要的类名 因为class是个保留字 所以使用className
+        var box3 = document.querySelector('.box3');
+        box3.onclick = function () {
+            // 把当前元素的类名修改为 box4 这样会覆盖原先的类名
+            this.className = 'box4';
+            // 如果想要保留原先的类名(保留原先的一些样式) 可以采用多类名选择器
+            // this.className = 'box3 box4';
+        }
+        // 案例3 密码框验证信息
+        // 获取元素
+        var ipt = document.querySelector('.ipt');
+        var message = document.querySelector('.message');
+        // 注册事件 失去焦点
+        ipt.onblur = function () {
+            // 判断表单里的内容长度是否满足条件 用表单里值的长度 ipt.value.length
+            if (this.value.length < 6 || this.value.length > 16) {
+                message.className = 'message wrong';
+                message.innerHTML = '您输入的位数不对要求6-16位';
+            }else{
+                message.className = 'message right';
+                message.innerHTML = '您输入的正确';
+            }
+        }
+    </script>
+</body>
+
+</html>

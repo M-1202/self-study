@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM事件基础</title>
+    <style>
+        div,
+        p {
+            width: 300px;
+            height: 50px;
+            line-height: 50px;
+            background-color: pink;
+        }
+        img {
+            width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn">唐伯虎</button>
+    <button id="time">显示当前系统时间</button>
+    <div>当前时间</div>
+    <p></p>
+    <div id="div1"></div>
+    <p id="p">
+        我是文字
+        <span>123</span>
+    </p>
+    <button id="yoona">林允儿</button>
+    <button id="IU">李知恩</button> <br>
+    <img src="img/yoona.jpg" alt="图片加载失败" title="yoona"> <br>
+    <img src="img/YOONA.webp" alt="图片加载失败" id="picture">
+    <div id="anli1">上午好哟~</div>
+    <script>
+        // 1. 事件三要素: 事件源 事件类型 事件处理程序
+        //   (1) 事件源  事件被触发的对象 谁 按钮
+        var btn = document.getElementById('btn');
+        //   (2) 事件类型 如何触发 什么条件 比如鼠标点击(onclick) 鼠标经过 键盘按下等等
+        //   (3) 事件处理程序 通过一个函数赋值的方式 完成
+        btn.onclick = function () {
+            alert('点秋香');
+        }
+        // 2. 执行事件的步骤
+        //    (1) 获取事件源 
+        //    (2) 注册事件(绑定事件)
+        //    (3) 添加事件处理程序(采取函数赋值形式)
+        // 3. 操作元素
+        //    (1) 修改元素内容  element.innerText element.innerHTML
+        // 当我们点击了按钮  div里面的文字会发生变化
+        //    获取元素
+        var btn = document.getElementById('time');
+        var div = document.querySelector('div');
+        var p = document.querySelector('p');
+        //    注册事件
+        btn.onclick = function () {
+            div.innerHTML= getDate();
+        }
+        // 不需要事件直接显示
+        p.innerHTML = getDate();
+        // 封装一个返回当前时间的函数
+        function getDate() {
+            var date = new Date();
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            month = month < 10 ? '0' + month : month;
+            var dates = date.getDate();
+            dates = dates < 10 ? '0' + dates : dates;
+            var arr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+            var day = date.getDay();
+            return '今天是:' + year + '年' + month + '月' + dates + '日' + arr[day];
+        }
+        // innerText  和  innerHTML 的区别
+        // · innerText 不识别html标签 非标准 去除空格和换行
+        var div1 = document.getElementById('div1');
+        // div1.innerText = '<strong>今天是:</strong>2022';  不会识别html标签  会显示<strong></strong>
+        // · innerHTML 识别html标签 W3C标准 保留空格和换行
+        div1.innerHTML = '<strong>今天是:</strong>2022';
+        // 这两个属性是可读写的  可以获取元素里面的内容
+        var p = document.getElementById('p');
+        console.log(p.innerText);   // 我是文字 123
+        console.log(p.innerHTML);   // 我是文字 <span>123</span>
+        // (2) 修改元素属性
+        var yoona = document.getElementById('yoona');
+        var IU = document.getElementById('IU');
+        var img = document.querySelector('img');
+        yoona.onclick = function(){
+            img.src = 'img/yoona.jpg';
+            img.title = 'yoona';
+        }
+        IU.onclick = function(){
+            img.src = 'img/IU.jpg';
+            img.title = 'IU';
+        }
+        // 案例1 分时间问候
+        // 1. 获取元素
+        var picture = document.getElementById('picture');
+        var anli1 = document.getElementById('anli1');
+        // 2. 得到当时的小时数  date内置对象
+        var date = new Date();
+        var h = date.getHours();
+        // 3. 判断当前的时间做出相应的操作
+        if (h < 12){
+            picture.src = "img/YOONA.webp";
+            anli1.innerHTML = '上午好哟~';
+        }else if (h < 18){
+            picture.src = 'img/yoona.jpg';
+            anli1.innerHTML = '下午好哟~';
+        }else {
+            picture.src = 'img/王者荣耀大背景图片.webp';
+            anli1.innerHTML = '晚上好哟~';
+        }
+    </script>
+</body>
+
+</html>

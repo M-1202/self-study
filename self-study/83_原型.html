@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原型</title>
+</head>
+
+<body>
+    <script>
+        // 1. 原型: 每个对象都有一个内置属性(__proto__) 指向它的原型  该属性指向另一个对象或者null
+        // 2. 每个构造函数都有一个prototype属性，该属性指向它的实例对象的原型
+        // 3. 每个原型对象(Construtor.prototype)都有一个constructor属性指向构造函数本身
+
+        // 4. 可以通过构造函数来设置原型: 构造函数创建的每一个实例对象会自动将构造函数的prototype属性作为其原型(__proto__)
+        // 5. 又因为每个对象其实都是构造函数创建出来的，所以每个实例对象都有__proto__指向它构造函数的prototype属性
+        // 6. 每个对象都有constructor指向它的构造函数  但是Construtor.prototype这个对象的constructor指向的是它所属的构造函数
+
+        function A() {
+            a = 1
+        }
+        const obj = new A()
+        const o = {
+            a: 1,
+            b: 2,
+            __proto__: {
+                c: 3
+            }
+        }
+        // obj.__proto__ = o
+        // console.log(o.__proto__)
+        console.log(o instanceof Object)    // true
+        console.log(A.prototype.constructor === A)  // true
+
+        // A.prototype 不在 A.prototype这个对象的原型链上
+        console.log(A.prototype instanceof A)   // false
+
+        // o的原型的constructor  就是  o的constructor
+        console.log(o.__proto__.constructor === o.constructor)  // true
+
+        // 实例对象的原型的constructor  就是  实例对象的constructor
+        console.log(obj.__proto__.constructor === obj.constructor)  // true
+
+        // 一个普通构造函数的构造函数(总构造函数)的prototype的原型   就是    Object.prototype
+        console.log(A.constructor.prototype.__proto__ === Object.prototype) // true
+
+        // 总构造函数的构造函数     还是    总构造函数  也就是它本身
+        console.log(A.constructor === A.constructor.constructor)        // true
+
+        // 通过(5)知道 __proto__指向它构造函数的prototype属性
+        // 总构造函数的__proto__ 就是 总构造函数的prototype
+        console.log(A.constructor.__proto__ === A.constructor.prototype)    // true
+
+        // 总构造函数的prototype的constructor 指向的是 总构造函数
+        console.log(A.constructor.prototype.constructor === A.constructor)  // true
+
+        // 总构造函数 还不是 Object
+        console.log(A.constructor === Object)   // false
+
+        // 总构造函数的prototype的__proto__   就是 Object.prototype
+        console.log(A.constructor.prototype.__proto__ === Object.prototype)
+
+        // 如果我们想要找到A.prototype的构造函数 我们可以通过(5)来实现
+        // 因为 A.prototype.__proto__ 指向的是 A.prototype的构造函数的prototype 通过(6)可得
+        console.log(A.prototype.__proto__.constructor)  // 
+        // 通过instanceof验证正确
+        console.log(A.prototype instanceof A.prototype.__proto__.constructor)   // true
+
+        // 总构造函数的prototype 的构造函数 就是 Object
+        console.log(A.constructor.prototype.__proto__.constructor === Object)   // true
+
+        // 总构造函数就是   Function
+        console.log(A.constructor)  // Function
+
+        // 很奇怪的现象
+        console.log(Object.constructor === Function)     // true
+        console.log(Function.constructor === Object)    // false
+        console.log(Function.constructor === Function)  // true
+        // 以上我们可以得出 Object的构造函数是Function
+        //                 Function的构造函数不是Object 而是它自己
+
+
+
+        // 判断Object.prototype 是否出现在 Function的原型链上
+        // 因为Function.__proto__也就是Function.prototype
+        // 所以Object.prototype 出现在 Function的原型链上
+        console.log(Function instanceof Object)     // true  理解
+
+        // 判断Function.prototype 是否出现在 Object的原型链上
+        // 我们可以先推出 Object.__proto__ === Function.prototype
+        console.log(Object.__proto__ === Function.prototype)    // true
+        // 所以Function.prototype 出现在 Object的原型链上
+        console.log(Object instanceof Function)     // true 理解
+
+        
+        console.log(Function === Object)        // false
+
+
+
+        console.log('-----------------------------------')
+
+
+    </script>
+</body>
+
+</html>

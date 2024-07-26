@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正则表达式</title>
+</head>
+
+<body>
+    <input type="text">
+    <script>
+        // 正则表达式使用
+        // 1. 定义规则
+        const reg = /前端/
+        // 2. 是否匹配
+        console.log(reg.test('学前端,挣大钱'))  // 返回值是一个布尔值
+        console.log('------------------')
+
+        // 元字符
+        console.log(/哈/.test('哈'))  // true
+        console.log(/哈/.test('哈哈'))  // true
+        console.log(/哈/.test('二哈'))  // true
+        // 1. 边界符 ^ $
+        //   要求以哈开头
+        console.log(/^哈/.test('哈'))  // true
+        console.log(/^哈/.test('哈哈'))  // true
+        console.log(/^哈/.test('二哈'))  // true
+        //    ^ $精确匹配    ^哈$ 只匹配一个哈
+        console.log(/^哈$/.test('哈'))  // true
+        console.log(/^哈$/.test('哈哈'))  // false
+        console.log('------------------')
+
+        // 2. 量词
+        //  * 重复零次或更多次  模式 >= 0
+        console.log(/^哈*$/.test(''))  // true
+        console.log(/^哈*$/.test('哈'))  // true
+        console.log(/^哈*$/.test('哈哈'))  // true
+        //  + 重复一次或更多次  模式 >= 1
+        console.log(/^哈+$/.test(''))  // false
+        console.log(/^哈+$/.test('哈'))  // true
+        console.log(/^哈+$/.test('哈哈'))  // true
+        //  ? 重复零次或一次    模式 = 0 / 1
+        console.log(/^哈?$/.test(''))  // true
+        console.log(/^哈?$/.test('哈'))  // true
+        console.log(/^哈?$/.test('哈哈'))  // false
+        //  {n} 重复n次     模式 = n  规定了具体次数
+        console.log(/^哈{2}$/.test(''))  // false
+        console.log(/^哈{2}$/.test('哈'))  // false
+        console.log(/^哈{2}$/.test('哈哈'))  // true
+        //  {n,} 重复n次或更多次     模式 >= n  
+        console.log(/^哈{1,}$/.test(''))  // false
+        console.log(/^哈{1,}$/.test('哈'))  // true
+        console.log(/^哈{1,}$/.test('哈哈'))  // true
+        //  {n,m} 重复n到m次     n <= 模式 <= m
+        console.log(/^哈{1,2}$/.test(''))  // false
+        console.log(/^哈{1,2}$/.test('哈'))  // true
+        console.log(/^哈{1,2}$/.test('哈哈'))  // true
+        console.log('------------------')
+
+        // 3. 字符类
+        //   [abc]   只选一个
+        console.log(/^[abc]$/.test('a'))  // true
+        console.log(/^[abc]$/.test('b'))  // trute
+        console.log(/^[abc]$/.test('c'))  // true
+        console.log(/^[abc]$/.test('abc'))  // false
+        console.log(/^[abc]{2}$/.test('ab'))  // true
+        //  [a-z]   只选一个
+        console.log(/^[a-z]$/.test('a'))  // true
+        console.log(/^[a-z]$/.test('A'))  // false
+        console.log(/^[0-9]$/.test('9'))  // true
+        console.log(/^[0-9]$/.test('10'))  // false
+        //  腾讯QQ号的正则表达式    QQ号从10000开始
+        console.log(/^[1-9][0-9]{4,}$/.test('10000'))  // true
+        console.log(/^[1-9][0-9]{4,}$/.test('2205961827'))  // true
+        console.log(/^[1-9]{2}[0-9]{4,}$/.test('10000'))  // false [1-9]重复两次不满足
+        // [] 里面加^取反符号 注意要写在[]里面
+        console.log(/^[^a-z]$/.test('哈'))  // true
+        console.log('------------------')
+
+        // 4. 修饰符    /表达式/修饰符
+        //  i 不区分大小写
+        console.log(/^[a-z]$/i.test('A'))  // true
+        //  g 匹配所有满足正则表达式的结果
+        // replace() 替换
+        const str = '学习java,Java工资很高'
+        console.log(str.replace(/java/ig, '前端'))
+
+        // 用户名验证案例
+        // 需求: 1. 用户名要求由 英文字母，数字，下划线或者短横线组成，并且长度为6-16位
+        //       2. 当表单失去焦点就开始验证    满足条件 弹出用户名设置成功 不满足条件 弹出用户名格式错误  
+        const input = document.querySelector('input')
+        // 1. 定义正则表达式
+        const regObj = /^[a-zA-Z0-9-_]{6,16}$/
+        // 2. 给表单注册失去焦点事件
+        input.addEventListener('blur', function () {
+            if (regObj.test(input.value)) {
+                alert('用户名设置成功')
+            } else {
+                alert('用户名格式错误')
+            }
+        })
+    </script>
+</body>
+
+</html>

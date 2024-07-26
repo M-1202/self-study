@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>元素的显示与隐藏</title>
+    <!-- 
+        本质:让一个元素在页面中隐藏或者显示出来
+        <1.display属性>          隐藏元素后，不再占有原来位置
+        display属性用于设置一个元素应如何显示
+        display :none;   隐藏对象
+        display :block;  除了转换为块级元素之外，同时还有显示元素的意思
+        <2.visibility 可见性>    隐藏元素后，继续占有原来位置
+        visibility属性用于指定一个元素应可见还是隐藏
+        visibility :visible;    元素可视
+        visibility :hidden;     元素隐藏
+        <3.opacity 透明度>       隐藏元素后，继续占有原来位置
+        opacity :0;     元素隐藏
+        opacity :1;     元素显示
+        <4.overflow 溢出>
+        overflow属性指定了如果内容溢出一个元素的框(超出其指定宽度及高度)时，会发生什么。
+        visible         不剪切内容也不添加滚动条(默认)
+        hidden          超出部分隐藏
+        scroll          不管是否超出内容，总是显示滚动条
+        auto            超出内容时显示滚动条，不超出时不显示滚动条
+     -->
+    <style>
+        .one {
+            /* display: none; */
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            /* visibility: hidden; */
+            /* opacity: 0; */
+        }
+        .two {
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+        }
+        .div {
+            overflow: hidden;
+            width: 200px;
+            height: 200px;
+            background-color: brown;
+        }
+    </style>
+</head>
+<body>
+    <div class="one">one</div>
+    <div class="two">two</div>
+    <div class="div">
+        2016年3月11日，林允儿公开首张个人单曲《德寿宫石墙路的春天》 [42]
+        ；4月3日，与林更新、金桢勋、贾青等领衔主演的古装剧《武神赵子龙》首播，林允儿在剧中分别饰演了面貌娇美，家境优越又不谙世事的“夏侯轻衣”和性格直爽，骄纵跋扈又侠肝义胆的“马玉柔”，这是其首次来中国拍戏 [43]
+    </div>
+</body>
+</html>

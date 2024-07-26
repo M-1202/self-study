@@ -1,0 +1,77 @@
+/* 整体大容器 */
+.models {
+    width: 80%;
+    margin: 0 auto;
+    /* 设置整体容器最小宽度 */
+    min-width: 800px;
+    margin-bottom: 50px;
+}
+/* 小容器 */
+.model {
+    /* 添加浮动 */
+    float: left;
+    width: 30%;
+    box-shadow: 2px 2px 2px #e3e3e3;
+    /* 设置小容器圆角 */
+    border-radius: 5px;
+    margin: 1%;
+}
+/* 用双伪元素清除浮动 */
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+/* 调整图片大小 */
+.model img {
+    width: 100%;
+    /* 设置图片圆角 */
+    border-radius: 5px 5px 0 0 ;
+}
+/* 给mark设置一个相对于父级的绝对定位 */
+.img {
+    /* 给父级设置相对定位 (子绝父相) */
+    position: relative;
+    /* 调节图片下侧间隙问题 */
+    font-size: 0;
+}
+.img .mark {
+    /* 给子级设置绝对定位 */
+    position: absolute;
+    /* 让mark里面的内容充满整个父级盒子 */
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    /* 文字水平居中 */
+    text-align: center;
+    font-size: 16px;
+    color: white;
+    /* 设置半透明背景颜色 */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 设置圆角 */
+    border-radius: 5px 5px 0 0;
+    /* 隐藏mark盒子 */
+    opacity: 0;
+    /* 过渡动画 */
+    transition: all 0.5s;
+}
+/* 使文本内容在中间显示 */
+.mark h2 {
+    margin-top: 70px;
+}
+/* 设置鼠标悬浮在小容器时显示mark蒙版 */
+.model:hover .mark {
+    opacity: 1;
+}
+/* 文本部分 */
+.model .text_1 {
+    text-align: center;
+    color: #666;
+    padding: 5px 0;
+    border-radius: 0 0 5px 5px;
+    background-color: white;
+}

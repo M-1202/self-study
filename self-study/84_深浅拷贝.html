@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深浅拷贝</title>
+</head>
+
+<body>
+    <script src="lodash.min.js"></script>
+    <script>
+        // 1. 浅拷贝    拷贝的是地址
+        // 1.1 拷贝对象: Object.assign() / {...obj}
+        // 1.2 拷贝数组: Array.prototype.concat() / [...arr]
+
+        // const obj = {
+        //     age: 18
+        // }
+        // const o = {...obj}  // 这里是新建了一个新对象 把obj里的数据放到o中
+        // console.log(o.age)  // 18
+        // o.age = 20
+        // console.log(o.age)  // 20
+        // console.log(obj.age)    // 18
+
+        // const obj = {
+        //     age: 18,
+        //     family:{
+        //         baby: 'pink'
+        //     }
+        // }
+        // const o = {}    // 这里是新建了一个新对象
+        // Object.assign(o,obj)  // 把obj里的数据放到o中
+        // console.log(o.age)  // 18
+        // o.age = 20
+        // console.log(o.age)  // 20
+        // console.log(obj.age)    // 18 原对象数据没有改变 因为数据全是基本数据类型  拷贝的是数值
+
+        // o.family.baby = 'red'
+        // console.log(o.family.baby)  // red
+        // console.log(obj.family.baby) // red 原对象的数据也被修改  因为这个属性是引用数据类型  它拷贝的是地址
+
+
+        // 2. 深拷贝    拷贝的是对象 不是地址
+        // 2.1 函数递归 函数内部自己调用自己
+        const obj = {
+            uname: 'pink',
+            age: 18,
+            hobby: ['乒乓球', '足球']
+        }
+        const o = {}
+        // 拷贝函数  简版
+        function deepCopy(newObj, oldObj) {
+            // 遍历旧对象
+            for (let k in oldObj) {
+                // 处理数组的情况
+                // 先判断是否是数组
+                if (oldObj[k] instanceof Array) {
+                    // 先把新对象的hobby设置成一个空数组
+                    newObj[k] = []
+                    // 再次调用deepCopy
+                    deepCopy(newObj[k], oldObj[k])
+                } else {
+                    // k 属性名     oldObj[k] 属性值
+                    // newObj[k]  ===  o.k  创建属性名
+                    newObj[k] = oldObj[k]
+                }
+            }
+        }
+        deepCopy(o, obj)
+        o.hobby = ['篮球']
+        console.log(o)      //  [篮球]
+        console.log(obj)    // 还是 ['乒乓球', '足球'] 没有修改旧对象的数据
+        console.log('-------------------------')
+
+        // 2.2 lodash库的_.cloneDeep()
+        const arr = [{a:1},{b:2}]
+        const newArr = _.cloneDeep(arr)
+        console.log(newArr)
+        console.log(arr === newArr) // false 拷贝的是对象 不是地址
+        console.log('-----------------------------')
+
+        // 2.3 JSON.stringify()
+        const obj1 = {
+            uname: '小明',
+            family: {
+                brother: '小亮'
+            }
+        }
+        const obj2 = JSON.parse(JSON.stringify(obj1))
+        console.log(obj2)
+        console.log(obj1 === obj2)  // false 拷贝的是对象 不是地址
+    </script>
+</body>
+
+</html>

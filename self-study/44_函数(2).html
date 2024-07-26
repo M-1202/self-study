@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数(2)</title>
+    <!-- 
+        1.arguments 的使用:
+        当我们不确定有多少个参数传递的时候,可以用 arguments 来获取，在JavaScript中，arguments 实际上它是当前函数的一个内置对象。所有函数都设置了一个 arguments 对象，argument对象中存储了传递的所有实参。
+        2.arguments展示形式是一个伪数组，因此可以进行遍历，伪数组具有以下特点:
+         (1) 具有 length 属性
+         (2) 按索引方式存储数据
+         (3) 不具有数组的 push,pop等方法
+     -->
+    <script>
+        // 案例1  使用 arguments 对象 来求出几个数字之间的最大值
+        function getMax() {                                      // 此处不需要定义形参
+            // console.log(arguments);                         arguments 里面存储了所有传递过来的实参
+            var max = arguments[0];
+            for (var i = 1; i < arguments.length; i++) {
+                if (arguments[i] >= max) {
+                    max = arguments[i];
+                }
+            }
+            return max;
+        }
+        var max1 = getMax(5, 6, 4, 7);
+        var max2 = getMax(77, 88, 99);
+        console.log(max1, max2);
+        // 3. 函数可以调用另一个函数: 因为每个函数都是独立的代码块，用于完成特殊任务，因此经常会用到函数相互调用的情况
+        // 代码从上到下依次运行         最终结果为:  111 222 fn2 fn1
+        function fn1() {
+            console.log(111);
+            fn2();                      // 在 fn1函数中调用 fn2函数
+            console.log('fn1');
+        }
+        function fn2() {
+            console.log(222);
+            console.log('fn2');
+        }
+        fn1();                          // 调用 fn1函数
+        // 案例2  用户输入年份，输出当前年份2月份的天数                     函数调用另一个函数
+        //        如果是闰年，则二月份是29天，如果是平年，则二月份是28天
+        // 判断是否为闰年
+        function isRun(year) {
+            var whether = false;
+            if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+                whether = true;
+            }
+            return whether;
+        }
+        function backDay() {
+            var year = (prompt('请您输入年份:'));
+            if (isRun(year)) {
+                alert(year + '年2月份的天数为:29天');
+            } else {
+                alert(year + '年2月份的天数为:28天');
+            }
+            /* var day = year + '年2月份的天数为:28天';
+            if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0){
+                day = year + '年2月份的天数为:29天';
+            }
+            return day; */
+        }
+        backDay();
+        // 4.函数的两种声明方式
+        //   (1) 利用函数关键字自定义函数(命名函数)
+        function fn() {
+
+        }
+        fn();
+        //   (2) 函数表达式(匿名函数)
+        //       var 变量名 = function() {};
+        var fun = function (aru){
+            console.log('我是函数表达式');
+            console.log(aru);
+        }
+        fun('pink老师');
+        // ① fun是变量名  不是函数名
+        // ② 函数表达式声明方式跟声明变量差不多，只不过变量里面存的是值 而 函数表达式里面存的是函数
+        // ③ 函数表达式也可以进行传递参数 
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

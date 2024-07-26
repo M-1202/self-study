@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简易计算器</title>
+    <script>
+        var flag = true;
+        while (flag) {
+            var option = parseInt(prompt('欢迎使用简易计算器:\n\u00201.加法运算;\n\u00202.减法运算;\n\u00203.乘法运算;\n\u00204.除法运算;\n\u00205.退出;\n\u0020请输入您的选项:'));
+            // 输入5时退出循环
+            if (option == 5) {
+                break;
+            }
+            var num1 = parseFloat(prompt('请输入第一个数:'));
+            var num2 = parseFloat(prompt('请输入第二个数:'));
+            // 用字面量方法创建一个计算器对象 里面有四种方法
+            var Caculator = {
+                add: function () {
+                    alert(num1 + num2);
+                },
+                minus: function () {
+                    alert(num1 - num2);
+                },
+                multiply: function () {
+                    alert(num1 * num2);
+                },
+                divide: function () {
+                    alert(num1 / num2);
+                }
+            }
+            switch (option) {
+                case 1:
+                    Caculator.add(num1, num2);
+                    break;
+                case 2:
+                    Caculator.minus(num1, num2);
+                    break;
+                case 3:
+                    Caculator.multiply(num1, num2);
+                    break;
+                case 4:
+                    Caculator.divide(num1, num2);
+                    break;
+            }
+        }
+        // 用字面量方法创建一个计算器对象
+        /* var Caculator = {
+                add: function (num1,num2) {
+                    alert(num1 + num2);
+                    console.log(11);
+                },
+                minus: function (num1, num2) {
+                    alert(num1 - num2);
+                },
+                multiply: function (num1, num2) {
+                    alert(num1 * num2);
+                },
+                divide: function (num1, num2) {
+                    alert(num1 / num2);
+                }
+            } */
+        // 构造函数创建对象
+        /* function Caculator() {
+            this.add = function () {
+                alert(num1 + num2);
+            }
+            this.minus = function () {
+                alert(num1 - num2);
+            }
+            this.multiply = function () {
+                alert(num1 * num2);
+            }
+            this.divide = function () {
+                alert(num1 / num2);
+            }
+        } */
+        // 构造函数方法
+        /*  var flag = true;
+ 
+             while (flag) {
+                 choice = parseInt(prompt('欢迎使用简易计算器：\n1.加法运算\n2.减法运算\n3.乘法运算\n4.除法运算\n5.退出\n请输入您的选项:'));
+                 if (choice == 5) {
+                     break;
+                 }
+                 var num1 = prompt('请输入第一个操作数：');
+                 var num2 = prompt('请输入第二个操作数：');
+                 var cal = new Caculator(parseInt(num1), parseInt(num2));
+                 switch (choice) {
+                     case 1:
+                         alert(cal.add());
+                         break;
+                     case 2:
+                         alert(cal.sub());
+                         break;
+                     case 3:
+                         alert(cal.mul());
+                         break;
+                     case 4:
+                         alert(cal.div());
+                         break;
+                     case 5:
+                         flag = false;
+                         break;
+                 }
+             }
+ 
+             function Caculator(num1, num2) {
+                 this.add = function () {
+                     return num1 + num2;
+                 }
+                 this.sub = function () {
+                     return num1 - num2;
+                 }
+                 this.mul = function () {
+                     return num1 * num2;
+                 }
+                 this.div = function () {
+                     return num1 / num2;
+                 }
+             }
+  */
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

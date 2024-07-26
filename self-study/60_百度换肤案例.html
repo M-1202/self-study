@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>百度换肤案例</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .baidu {
+            display: block;
+            margin: 100px 400px;
+        }
+        body {
+            background: url(img/YOONA.webp) no-repeat center top;
+        }
+        img {
+            float: left;
+            /* width: 100px; */
+            height: 100px;
+            cursor: pointer;
+        }
+        .clearfix:after {
+            content:"";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <ul class="baidu clearfix">
+        <li><img src="img/YOONA.webp"></li>
+        <li><img src="img/yoona.jpg"></li>
+        <li><img src="img/IU.jpg"></li>
+        <li><img src="img/王者荣耀大背景图片.webp"></li>
+    </ul>
+    <script>
+        var imgs = document.querySelector('.baidu').querySelectorAll('img');
+        var bodyEle = document.body;
+        for (var i = 0; i < imgs.length; i++) {
+            imgs[i].onclick = function(){
+                // this.src 获取当前照片的地址
+                bodyEle.style.backgroundImage = 'url(' + this.src + ')';
+            }
+        }
+    </script>
+</body>
+</html>

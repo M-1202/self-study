@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组作业</title>
+    <!-- 
+        需求：用户输入四个季度的数据，可以生成柱形图
+        分析：
+            1. 需要输入4次，所以可以把4个数据放到一个数组里面
+                · 利用循环，弹出4次框，同时存到数组里面
+            2. 遍历改数组，根据数据生成四个柱状图，渲染打印到页面中
+                · 柱形图就是div盒子，设置宽度固定，高度是用户输入的数据
+                · div里面包含显示的数字和第N季度
+     -->
+    <style>
+        .box {
+            /* 给大盒子添加弹性布局 */
+            display: flex;
+            width: 700px;
+            height: 300px;
+            margin: 100px auto;
+            border-left: 1px solid black;
+            border-bottom: 1px solid black;
+            /* 设置弹性盒子沿主轴的对齐方式 */
+            justify-content: space-around;
+            /* 设置弹性盒子沿侧轴的对齐方式 */
+            align-items: flex-end;
+            text-align: center;
+        }
+
+        .box div {
+            display: flex;
+            width: 50px;
+            background-color: pink;
+            /* 将主轴改为垂直方向 */
+            flex-direction: column;
+            /* 设置里面弹性盒子沿主轴(垂直方向) 的对齐方式  两端对齐*/
+            justify-content: space-between;
+        }
+
+        .box div span {
+            margin-top: -20px;
+        }
+
+        .box div h4 {
+            /* 设置宽度装文字   让文字能写在一行上 */
+            width: 70px;
+            /* 将h4文字先垂直下移 */
+            margin-bottom: -50px;
+            /* 再向左移动 */
+            margin-left: -10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="box">
+        <div style="height: 100px;">
+            <span>123</span>
+            <h4>第1季度</h4>
+        </div>
+        <div style="height: 100px;">
+            <span>123</span>
+            <h4>第1季度</h4>
+        </div>
+        <div style="height: 100px;">
+            <span>123</span>
+            <h4>第1季度</h4>
+        </div>
+        <div style="height: 100px;">
+            <span>123</span>
+            <h4>第1季度</h4>
+        </div>
+    </div> -->
+    <script>
+        let arr = []
+        for (let i = 1; i <= 4; i++) {
+            arr.push(prompt(`请您输入第${i}个季度的数据`))
+        }
+        // 盒子开头
+        document.write(`<div class="box">`)
+        // 盒子中间
+        for (let i = 0; i < arr.length; i++) {
+            document.write(`
+            <div style="height: ${arr[i]}px;">
+            <span>${arr[i]}</span>
+            <h4>第${i + 1}季度</h4>
+            </div>
+            `)
+        }
+
+
+
+        // 盒子结尾
+        document.write(`</div>`)
+    </script>
+</body>
+
+</html>

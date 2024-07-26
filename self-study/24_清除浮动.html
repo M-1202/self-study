@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>清除浮动</title>
+    <!-- 
+        <为什么要清除浮动>
+        详细解释:由于父级盒子在很多情况下,不方便给高度,但是子盒子浮动又不占有位置,不会撑开父级盒子,最后父级盒子高度为0时,就会影响下面的标准流盒子(方便理解)
+        概要解释:由于浮动元素不再占用原标准流的位置(脱标),所以它会对后面的元素排版产生影响
+        <清除浮动本质>
+        1.清除浮动的本质是清除浮动元素造成的影响
+        2.如果父盒子本身有高度,则不需要清除浮动
+        3.清除浮动之后,父级就会根据浮动的子盒子自动检测高度,父级有了高度,就不会影响下面的标准流了
+        <清除浮动>
+        语法:
+            选择器 {clear: 属性值;}  (left right both) 几乎只用clear: both;
+        清除浮动的策略是:闭合浮动
+        <清除浮动的方法>
+        1.额外标签法也称为隔墙法,是W3C推荐的做法(不推荐)
+        具体方法:在浮动元素末尾添加一个空的标签(块级元素),例如<div style="clear: both"></div>
+        (个人理解 额外标签法的原理:此时该标准流不会被前面的浮动元素所影响,所以该标准流就会另起一行排列,因此会撑开父级盒子,由于该标准流为空白标签不占位置,不影响父级盒子撑开的大小。即父级盒子的高度由浮动子元素撑开)
+        2.父级添加overflow属性(不推荐)
+        具体方法:在父级元素添加 overflow:hidden(常用) / auto / scroll
+        3.父级添加after伪元素(推荐)    是额外标签法的升级版  有固定的代码
+        步骤:
+        ①先定义一个class类名(一般都是clearfix)用于生成一个伪元素
+        ②在需要清除浮动的父元素上添加类名
+        4.父级添加双伪元素(推荐)   有固定的代码
+        步骤:
+        ①先定义一个class类名(一般都是clearfix)用于生成一个伪元素
+        ②在需要清除浮动的父元素上添加类名
+     -->
+    <style>
+        .box {
+            width: 400px;
+            background-color: pink;
+            /* 方法2 */
+            /* overflow: hidden; */
+        }
+        .box .damao {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            float: left;
+        }
+        .box .ermao {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            float: left;
+        }
+        /* 方法1 额外标签法 */
+        /* .box .clear {
+            clear: both;
+        } */
+        /* 方法3 父级添加after伪元素 */
+        /* .clearfix::after {
+            content:"";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+            .clearfix {  * IE6、7专有 *
+                *zoom: 1;
+            }
+        } */
+        /* 方法4 父级添加双伪元素 */
+        .clearfix::before,
+        .clearfix::after {
+            content:"";
+            display: table;
+        }
+        .clearfix::after {
+            clear:both;
+        }
+        /* .clearfix {  * IE6、7专有 *
+                *zoom: 1;
+            } */
+    </style>
+</head>
+<body>
+    <div class="box clearfix">
+        <div class="damao"></div>
+        <div class="ermao"></div>
+        <!-- 验证额外标签法的原理 -->
+        <!-- <div class="clear">123</div> -->
+    </div>
+</body>
+</html>

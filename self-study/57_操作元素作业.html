@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>操作元素作业</title>
+    <style>
+        * {
+            list-style: none;
+        }
+        a {
+            text-decoration: none;
+            color: #999;
+        }
+        .box {
+            display: block;
+            width: 100px;
+            height: 200px;
+            margin: 100px auto;
+        }
+        .top1 {
+            /* position: absolute;
+            top: -30px;
+            left: 0; */
+            display: block;
+            width: 100px;
+            height: 30px;
+            /* margin: 100px auto; */
+            line-height: 30px;
+            text-align: center;
+            background: purple url(img/xiala.png) no-repeat right center;
+        }
+        .myul {
+            display: none;
+        }
+        .myul li {
+            margin: 10px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btn">开关灯按钮</button>
+    <ul class="box">
+        <li class="myli">
+            <a href="#" class="top1">地区</a>
+            <ul class="myul">
+                <li><a href="#">河南</a></li>
+                <li><a href="#">北京</a></li>
+                <li><a href="#">上海</a></li>
+                <li><a href="#">成都</a></li>
+                <li><a href="#">深圳</a></li>
+            </ul>
+        </li>
+    </ul>
+    <script>
+        // 作业1  开关灯案例
+        var btn = document.querySelector('.btn');
+        var bodyEle = document.body;
+        var flag = 0;
+        btn.onclick = function () {
+            if (flag == 0) {
+                bodyEle.style.backgroundColor = 'black';
+                flag = 1;
+            } else {
+                bodyEle.style.backgroundColor = 'white';
+                flag = 0;
+            }
+        }
+        // 作业2 下拉菜单
+        var myul = document.querySelector('.myul');
+        var top1 = document.querySelector('.top1');
+        var myli = document.querySelector('.myli');
+        myli.onmouseover = function () {
+            myul.style.display = 'block';
+        }
+        myli.onmouseout = function(){
+            myul.style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>

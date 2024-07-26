@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数作业</title>
+    <script>
+        // 作业1 写一个函数,用户输入任意两个数字的任意算术运算(简单的计算器小功能),并能弹出运算后的结果
+        function getResult(n1, fuhao, n2) {
+            var result = 0;
+            if (fuhao == '+') {
+                result = n1 + n2;
+            } else if (fuhao == '-') {
+                result = n1 - n2;
+            } else if (fuhao == '*') {
+                result = n1 * n2;
+            } else if (fuhao == '/') {
+                result = n1 / n2;
+            } else if (fuhao == '%') {
+                result = n1 % n2;
+            } else {
+                result = '输入格式错误!';
+            }
+            return result;
+        }
+        var result = getResult(parseFloat(prompt('请您输入第一个值:')), prompt('请输入您要进行的操作:'), parseFloat(prompt('请您输入第二个值:')));
+        alert('结果为:' + result);
+        // 作业2 写一个函数,用户输入任意两个数字,求它们的最大值,并能弹出运算后的结果
+        function getMax1(num1, num2) {
+            var max = 0;
+            num1 >= num2 ? max = num1 : max = num2;
+            return max;
+        }
+        var max1 = getMax1(prompt('请您输入第一个数字:'), prompt('请您输入第二个数字:'));
+        alert('它们的最大值为:' + max1);
+        // 作业3 写一个函数,用户输入一个数判断是否为素数,并能弹出返回值 (又叫质数,只能被1和自身整除的数)
+        // 方法一  没有用return 返回值    不建议
+        function isSu(num) {
+            if (num == 1) {
+                alert(num + '不是质数');
+            } else {
+                for (var i = 2; i < num - 1; i++) {
+                    if (num % i == 0) {
+                        alert(num + '不是质数');
+                        return 0;
+                    }
+                }
+                alert(num + '是质数');
+            }
+        }
+        isSu(prompt('请输入一个整数'));
+        // 方法二 用了return 返回值   建议
+        function zhishu(num) {
+            var str = num + '是质数';
+            if (num == 1) {
+                str = num + '不是质数';
+                return str;
+            } else {
+                for (var i = 2; i <= Math.sqrt(num); i++) {
+                    if (num % i == 0) {
+                        str = num + '不是质数';
+                        return str;
+                    }
+                }
+                return str;
+            }
+        }
+        var str = zhishu(prompt('请输入一个整数:'));
+        alert(str);
+        // 作业4  利用函数 把任意数组中的元素按照从小到大排列   increase 增长        冒泡排序
+        function arrIncrease(arr) {
+                for (var i = 0; i <= arr.length - 1; i++) {            // 外层循环控制 要走的趟数
+                    // -i 是因为每趟循环结束会确定一个最大值的位置  后续不需要再作比较
+                    for (var j = 0; j < arr.length - i; j++) {
+                        if (arr[j] >= arr[j + 1]) {
+                            // 交换两个变量的值
+                            arr[j] = arr[j] + arr[j + 1] - (arr[j + 1] = arr[j]);
+                        }
+                    }
+                }
+                return arr;
+            }
+        console.log(arrIncrease([2, 5, 3, 7, 9, 1, 2]));
+        // 作业5 利用函数 翻转数组  reverse  翻转
+        function reverse(arr) {
+            var newArr = [];
+            for (var i = arr.length - 1; i >= 0; i--) {
+                // 利用 newArr.length 作 newArr 的索引号 newArr.length是一个动态检测记录数组元素的
+                newArr[newArr.length] = arr[i];
+            }
+            return newArr;
+        }
+        var newArr = reverse(['red', 'blue', 'green', 'pink']);
+        console.log(newArr);
+        var arr1 = [1, 2, 3, 4];
+        console.log(reverse(arr1));
+        // 作业6 判断闰年       要求: 输入一个年份，判断是否是闰年(闰年: 能被4整除并且不能被100整除，或者能被400整除)
+        function isRun(year) {
+            str = year + '不是闰年';
+            if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+                str = year + '是闰年';
+            }
+            return str;
+        }
+        var str = isRun(prompt('请您输入一个年份:'));
+        alert(str);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

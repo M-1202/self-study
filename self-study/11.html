@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+    function buildTree(data) {
+            let tree = {};
+
+            data.forEach(item => {
+                let parts = item.split('/');
+                let path = parts[0].split('-');
+                let filename = parts.length > 1 ? parts[1] : parts[0];
+
+                let current = tree;
+                path.forEach(directory => {
+                    if (!(directory in current)) {
+                        current[directory] = {};
+                    }
+                    current = current[directory];
+                });
+
+                current[filename] = {}; 
+            });
+
+            return tree;
+        }
+
+        // 测试数据
+        let testData = [
+            'A-B-C-D-E/F',
+            'A-B-K/L',
+            'G',
+            'A-H/I',
+            'M-B-C-D/M-N',
+            'M-B-C-D'
+        ];
+
+        let tree = buildTree(testData);
+
+        let treeJson = JSON.stringify(tree, null, 2);
+        console.log(treeJson);
+
+   </script>
+</body>
+</html>

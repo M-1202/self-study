@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象</title>
+    <!-- 
+        1.对象
+            1.1 什么是对象
+                在JavaScript中，对象是一组无序的相关属性和方法的集合，所有的事物都是对象，例如字符串、数值、数组、函数等。
+                对象是由属性和方法组成的
+                ·属性:事物的特征，在对象中用属性来表示(常用名词)
+                ·方法:事物的行为，在对象中用方法来表示(常用动词)
+            1.2 为什么需要对象
+                保存一个值时，可以使用变量;保存多个值(一组值)时，可以使用数组;保存一组无序的数据，可以使用对象
+        2.创建对象的三种方式
+            2.1 利用字面量创建对象
+                对象字面量:就是花括号{}里面包含了表达这个具体事物(对象)的属性和方法
+            2.2 利用 new Object 创建对象
+            2.3 利用构造函数创建对象
+                (1)构造函数:是一种特殊的函数,主要用来初始化对象,即为对象成员变量赋初始值,它总与new运算符一起使用。我们可以把对象中一些公共的属性和方法抽取出来,然后封装到这个函数里面
+                (2)为什么需要构造函数
+                   因为我们一次创建一个对象,里面很多的属性和方法是大量相同的,我们只能复制
+                   因此我们可以利用函数的方法,重复这些相同的代码,我们就把这个函数称为 构造函数
+                   又因为这个函数不一样,里面封装的不是普通代码,而是 对象
+                   构造函数就是把我们对象里面一些相同的属性和方法抽取出来封装到函数里面
+        3.遍历对象属性
+     -->
+    <script>
+        // 1.1 利用字面量创建对象 {}
+        var obj = {
+            uname: '林允儿',
+            age: 18,
+            sex: '女',
+            sayHi: function(){          // 用一个匿名函数来封装方法
+                console.log('hi~');
+            }
+        }
+            // (1) 里面的属性或者方法我们采取键值对的形式  键 属性名 : 值 属性值
+            // (2) 多个属性或者方法中间用逗号隔开
+            // (3) 方法冒号后面跟的是一个匿名函数
+        // 1.2 使用对象
+        //     (1)调用对象的属性 我们采取 对象名.属性名  . 我们理解为“的”
+        console.log(obj.uname);
+        //     (2)调用属性的另一种方法  对象名['属性名']
+        console.log(obj['age']);
+        //     (3)调用对象的方法    对象名.方法名()    千万别忘加小括号
+        obj.sayHi();
+        // 练习1
+        var dog = {
+            dogName:'可可',
+            type: '阿拉斯加犬',
+            age: '5岁',
+            color: '棕红色',
+            jiNeng: function(){
+                console.log('汪汪汪');
+                console.log('演电影');
+            }
+        }
+        console.log(dog.color);
+        dog.jiNeng();
+        // 2.1 利用 new Object 创建对象
+        var obj = new Object();     // 创建了一个空的对象
+        obj.uname = '林允儿';
+        obj.age = 18;
+        obj.sex = '女';
+        obj.sayHi = function(){
+            console.log('hi~');
+        }
+        //     (1)我们是利用 等号 = 赋值的方法 添加对象的属性和方法
+        //     (2)每个属性和方法之间用 分号结束
+        console.log(obj.uname);
+        console.log(obj['sex']);
+        obj.sayHi();
+        // 练习2
+        var person = new Object();
+        person.uname = '鸣人';
+        person.sex = '男';
+        person.age = 19;
+        person.skill = function(){
+            console.log('影分身术');
+        }
+        console.log(person.uname);
+        console.log(person.sex);
+        console.log(person.age);
+        person.skill();
+        // 3.1 利用构造函数创建对象
+        // 3.2 构造函数的语法结构
+        // function 构造函数名(){
+        //     this.属性 = 值;
+        //     this.方法 = function(){
+
+        //     }
+        // }
+        // new 构造函数名();        构造函数的调用
+        // 利用构造函数创建四大天王对象
+        function Star(uname,age,sex){
+            this.name = uname;
+            this.age = age;
+            this.sex = sex;
+            this.sing = function(song){
+                console.log(song);
+            }
+        }
+        var ldh = new Star('刘德华',18,'男');       // 调用函数返回的是一个对象 ()里面为其属性
+        var zxy = new Star('张学友',19,'男');
+        console.log(ldh.name);
+        console.log(ldh['age']);
+        ldh.sing('冰雨');       // 调用对象的方法
+        console.log(typeof ldh);
+        console.log(zxy.name);
+        console.log(zxy['age']);
+        // (1)构造函数名字首字母要大写
+        // (2)我们构造函数不需要return 就可以返回结果
+        // (3)我们调用构造函数 必须使用new
+        // (4)我们只要new Star() 调用函数就创建一个对象 ldh {}
+        // new 关键字执行过程
+        //     1. new 在内存中创建了一个空对象
+        //     2. this 就会指向刚才创建的空对象
+        //     3. 执行构造函数里面的代码 给这个空对象添加属性和方法
+        //     4. 返回这个对象(所以构造函数里不需要return)
+        // 练习3    利用构造函数创建两个英雄对象,函数中的公共部分包括:姓名属性(name),类型属性(type),血量属性(blood)和攻击方式(attack)
+        function Hero(uname,type,blood){
+            this.name = uname;
+            this.type = type;
+            this.blood = blood;
+            this.attack = function(attack){
+                console.log(attack);
+            }
+        }
+        var lianpo = new Hero('廉颇','坦克','500血量');
+        console.log(lianpo.name,lianpo.type,lianpo.blood);
+        lianpo.attack('近战');
+        var houyi = new Hero('后羿','射手','100血量');
+        console.log(houyi.name,houyi.type,houyi.blood);
+        houyi.attack('远程');
+        // 4.1 遍历对象属性
+        // for in : 用于对数组或者对象的属性进行循环操作     遍历对象
+        // for(变量 in 对象){
+
+        // }
+        var me = {
+            name : '彭于晏',
+            age : 18,
+            sex : '男'
+        }
+        for (var k in me){
+            console.log(k);     // k变量 输出的是 属性名
+            console.log(me[k]); // me[k] 输出的是 属性值
+        }
+        // 我们使用 for in 里面的变量 喜欢使用 k 或者 key
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件流</title>
+    <!-- 
+        <事件流>
+            事件流指的是事件完整执行过程中的流动路径
+        1. 事件捕获
+            从DOM的根元素开始去执行对应的事件(从外到里)
+            代码: 元素对象.addEventListener('事件类型',回调函数,是否使用捕获机制)
+        2. 事件冒泡
+            当一个元素触发事件后，会依次向上调用所有父级元素的同名事件
+        注意: 元素对象事件绑定中的第三个参数   true 事件捕获(很少使用)
+                                             false/默认 事件冒泡
+        3. 阻止冒泡
+            问题: 因为默认就有冒泡模式的存在，所以容易导致事件影响到父级元素
+            需求: 若想把事件限制在当前元素内，就需要阻止事件冒泡
+            前提: 阻止事件冒泡就需要拿到事件对象(e)
+            语法: 事件对象(e).stopPropagation()
+            注意: 此方法可以阻断事件流动传播，包括捕获阶段和冒泡阶段
+            <阻止元素默认行为>
+            某些情况下需要组织元素默认行为的发生    比如，阻止链接的跳转、表单域的接收
+            语法: e.preventDefault()
+        4. 解绑事件     针对addEventListener方式 解绑的方式为
+            语法: 元素对象.removeEventListener('事件类型',回调函数,[是否捕获])
+            例如，
+            function fn(){
+                alert('点击了')
+            }
+            绑定事件: btn.addEventListener('click',fn)
+            解绑事件: btn.removeEventListener('click',fn)
+            注意: 匿名函数无法被解绑
+        5. 事件委托
+            事件委托是利用事件流的特征解决一些开发需求的知识技巧
+            优点: 减少注册次数，可以提高程序性能
+            原理: 事件委托其实是利用事件冒泡的特点  即给父元素注册事件，当我们触发子元素的时候，会冒泡到父元素身上，从而触发父元素的事件
+            实现: 事件对象.target.tagName   可以获得真正触发事件的元素
+     -->
+    <style>
+        .father {
+            width: 500px;
+            height: 500px;
+            background-color: pink;
+            margin: 100px;
+        }
+        .son {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="father">
+        <div class="son"></div>
+    </div>
+    <a href="https://www.baidu.com/">点击跳转百度</a>
+    <ul>
+        <li>第一个</li>
+        <li>第二个</li>
+        <li>第三个</li>
+        <li>第四个</li>
+        <p>我不需要变色</p>
+    </ul>
+    <script>
+        // 获取元素对象
+        const fa = document.querySelector('.father')
+        const son = document.querySelector('.son')
+        const a = document.querySelector('a')
+        // 注册事件
+        // document.addEventListener('click', function (){
+        //     alert('我是爷爷')
+        // })
+        fa.addEventListener('click',function(){
+            alert('我是爸爸')
+        })
+        son.addEventListener('click', function (e){
+            alert('我是儿子')
+            e.stopPropagation() // 阻止冒泡
+        })
+        a.addEventListener('click',function(e){
+            e.preventDefault()  // 阻止链接的跳转
+        })
+        const ul = document.querySelector('ul')
+        ul.addEventListener('click',function(e){
+            // console.log(e);
+            // console.log(e.target)    // e.target 当前触发事件的对象
+            // 只有标签名为LI的时候才要求变色
+            if(e.target.tagName === 'LI'){
+                e.target.style.color = 'red'
+            }
+        })
+    </script>
+</body>
+</html>

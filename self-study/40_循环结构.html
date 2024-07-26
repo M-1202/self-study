@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>循环结构</title>
+    <!-- 
+        循环结构包括:
+        1.for 循环
+        2.while 循环
+        3.do-while 循环
+     -->
+    <script>
+        // 1.for 循环的语法结构
+        /* for(初始化变量;条件表达式;操作表达式){
+            循环体;
+        } */
+        // 2.初始化变量     就是用var声明的一个普通变量,通常作为计数器使用
+        // 3.条件表达式     就是用来决定每一次循环是否继续进行 也就是终止的条件
+        // 4.操作表达式     是每次循环最后执行的代码  经常用于我们计数器变量的更新(递增或递减)
+        // 5.执行过程:      2-3-循环体-4-3-循环体-4- ... - 3(不满足退出循环)
+        //  案例1 求1~100之间所有整数的累加和 
+        var sum = 0;
+        for(var i = 1;i <= 100;i++){
+            sum += i;
+        }
+        console.log('1~100之间所有整数的累加和为:' + sum);
+        // 案例2 求1~100之间所有偶数和、所有奇数和 
+        var sum1 = 0;
+        var sum2 = 0;
+        for(var i = 1;i <= 100;i++){
+            if(i % 2 == 0){
+                sum1 += i;
+            }else{
+                sum2 += i;
+            }
+        }
+        console.log('1~100之间所有偶数和为:' + sum1);
+        console.log('1~100之间所有奇数和为:' + sum2);
+        // 案例3 要求用户输入班级人数，之后依次输入每个学生的成绩，最后打印出该班级的总成绩以及平均值 (!:出现精度缺失问题)
+        var people = prompt('请输入班级总人数:'), sum = 0;
+        for (var i = 1; i <= people; i++) {
+            sum += parseFloat(prompt('请输入第' + i + '个同学的成绩:'));
+        }
+        var average = sum / people;
+        alert('该班级的总成绩为:' + sum);
+        alert('该班级的平均成绩为:' + average);
+        // 案例4 打印m行n列的星星★
+        var str = '';
+        var m = prompt('请输入打印m行的星星:');
+        var n = prompt('请输入打印n列的星星:');
+        for(var i = 1; i <= m; i++){            // 外层循环负责打印m行
+            for(var j = 1; j <= n; j++){        // 里层循环负责打印一行n个星星
+                str = str + '★';
+            }
+            str = str + '\n';                         // 里层循环后换行
+        }
+        console.log(str);
+        // 案例5 打印n行倒三角
+        var str = '';
+        var n = prompt('请输入打印几行的倒三角');
+        // 方法一
+        for (var i = 1; i <= n; i++) {              // 外层控制打印的行数
+               for (j = i; j <= n; j++) {              // 里层控制每行打印的星星数 递减
+                   str = str + '★';
+               }
+               str = str + '\n';                       // 里层循环结束后换行                                  
+           }
+           console.log(str);                        // 最后打印出星星
+        // 方法二
+        for(var i = n; i >= 1; i--){         // 外层 i递减 i控制每行打印的星星数
+            for(var j = 1; j <= i; j++){        // 里层控制每一行要打印的星星数 递减
+                str = str + '★';
+            }
+            console.log(str);                   // 里层循环结束后打印出来星星
+            str = '';                           // 对str 清零
+        }
+        // 案例6 打印九九乘法表
+        var str = '';
+        for(var i = 1; i <= 9; i++){                                // 外层控制打印的行数
+            for(var j = 1; j <= i; j++){                            // 里层控制一行的个数
+                str += j + '*' + i + '=' + j * i + '\t';            // 注意字符串连接   把每次循环的结果连接在一起
+            }
+            str = str + '\n';                                       // 换行: 里层循环后把连接在一起的字符串切开
+        }
+        console.log(str);
+    </script>
+    <script>
+        // 1.while 循环语法结构
+        /* while(条件表达式){
+            循环体;
+        } */
+        // 2.执行思路   当条件表达式结果为true 则执行循环体 否则 退出循环
+        // 3.里面应该也有 计数器  初始化变量
+        // 4.里面应该也有操作表达式     完成计数器的更新  防止死循环
+        // 案例1 打印人的一生，从1岁到100岁
+        var age = 1;
+        while(age <= 100){
+            console.log(age + '岁');
+            age++;
+        }
+        // 案例2 计算1~100所有整数的和
+        var i = 1, sum = 0;
+        while(i <= 100){
+            sum += i;
+            i++;
+        }
+        console.log(sum);
+    </script>
+    <script>
+        // 1.do-while 循环 语法结构
+        /* do {
+            循环体;
+        }while(条件表达式) */
+        // 2.执行思路 跟while不同的地方在于 do-while 先执行依次循环体 再判断条件 如果条件表达式结果为真，则执行循环体，否则退出循环
+        // 案例1 打印人的一生，从1岁到100岁
+        var age = 1;
+        do {
+            console.log(age + '岁');
+            age++;
+        }while(age <= 100)
+        // 案例2 计算1~100所有整数的和
+        var i =1, sum = 0;
+        do {
+            sum += i;
+            i++;
+        }while(i <= 100)
+        console.log(sum);
+    </script>
+    <!-- 
+        循环小结:
+        1. js中循环有 for、while、do-while
+        2. 三个循环很多情况下都可以相互替代使用
+        3. 如果是用来计数,跟数字相关的,三者使用基本相同,但是我们更喜欢用for
+        4. while和do-while可以做更复杂的判断条件,比for循环灵活一些
+        5. while和do-while 执行顺序不一样,while先判断后执行,do-while先执行后判断
+        6. while和do-while 执行次数不一样,do-while至少会执行一次循环体,而while 可能一次也不执行
+        7. 实际开发中,我们更常使用for循环语句,它写法更简洁直观
+        8. continue 关键字 退出本次循环(当前次的循环),继续执行剩余次数循环
+        9. break 关键字 立即跳出整个循环(循环结束)
+     -->
+</head>
+
+<body>
+
+</body>
+
+</html>

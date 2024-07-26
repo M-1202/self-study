@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组</title>
+    <script>
+        // 1.数组(Array): 是一组数据的集合,其中的每个数据被称作元素,在数组中可以存放任意类型的元素,数组是一种将一组数据存储在单个变量名下的优雅方式
+        // 2.利用new 创建数组
+        var arr1 = new Array();      // 创建了一个空的数组
+        // 3.利用数组字面量创建数组       数据之间用逗号隔开                   
+        var arr2 = [];                                     // 创建一个空数组
+        var arr3 = [1, '小白', '小黑', '大黄', '来福', true];           // 创建带初始值的数组
+        console.log(arr1, arr2, arr3);
+        // 4.数据的索引(下标)     用来访问数组元素的序号(数组下标从0开始)
+        console.log(arr3[1]);       // 打印数组中索引号为1 的数组元素(第二个元素)
+        // 5.遍历数组       就是把数组中的元素从头到尾都访问一次
+        // ① 因为我们的数组索引号是从0开始的,所以 i 必须从0开始   i < arr3.length
+        // ② 输出的时候 arr[i]  i 计数器作为索引号来用
+        // ③ 数组的长度         数组名.length   可以动态检测数组元素的个数    长度就是数组元素的个数   要和索引号区别开   索引号是从0开始的
+        for (var i = 0; i < arr3.length; i++) {
+            console.log(arr3[i]);
+        }
+        // 案例1 数组求和及平均值
+        var arr = [2, 6, 1, 7, 4], sum = 0;
+        for (i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        var average = sum / arr.length;
+        console.log(sum);
+        console.log(average);
+        // 案例2 求数组最大值
+        var arr = [2, 6, 1, 77, 52, 25, 7];
+        var max = arr[0];
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] >= max) {
+                max = arr[i];
+            }
+        }
+        console.log(max);
+        // 案例3 数组转换为分割字符串   要求：将数组转换为字符串,并且用 | 分割
+        var arr = ['red', 'green', 'blue', 'pink'];
+        var str = '';
+        for (var i = 0; i < arr.length; i++) {
+            str += arr[i] + '|';
+        }
+        console.log(str);
+        // 6.数组中新增元素
+        //  .1修改length长度
+        var arr = ['red', 'green', 'blue'];     // 此时数组长度为3
+        arr.length = 5;                         // 修改数组长度为5
+        console.log(arr);                       // 新增加两个空值  此时长度为5
+        //  .2修改索引号    追加数组元素
+        var arr = ['red', 'green', 'blue'];     // 此时数组长度为3
+        arr[3] = 'pink';                        // 在索引号为3的位置上新增一个'pink'元素 此时长度为4
+        console.log(arr);
+        arr[5] = 'yellow';                      // 在索引号为5的位置上新增一个'yellow'元素 之间的值为空值  此时长度为6
+        console.log(arr);
+        arr[0] = 1;                             // 这里是修改索引号为0的元素
+        console.log(arr);
+        // 案例4 数组新增元素
+        var arr = [];
+        for (var i = 1; i <= 10; i++) {         // 计数 添加多少个元素
+            arr[i - 1] = i;
+        }
+        console.log(arr);
+        // 案例5 筛选数组       将下列数组中大于等于10的元素选出来,放入新数组中  并计算满足的个数
+        // 方法一
+        var arr1 = [2, 0, 6, 1, 77, 0, 52, 10, 25, 7];
+        var arr2 = [];
+        var j = 0;                  // 新定义一个 j 来表示新数组的索引号
+        for (var i = 0; i < arr1.length; i++) {
+            if (arr1[i] >= 10) {
+                arr2[j] = arr1[i];
+                j++;
+            }
+        }
+        console.log(arr2, j);        // 因为最后一步j进行加一,此时 j 表示新数组元素的个数 
+        // 方法二
+        var arr1 = [2, 0, 6, 1, 77, 0, 52, 10, 25, 7];
+        var arr2 = [];
+        // 此时 arr2.length = 0               
+        for (var i = 0; i < arr1.length; i++) {
+            if (arr1[i] >= 10) {
+                arr2[arr2.length] = arr1[i];    // arr2数组有了值,其length会自动增加
+            }
+        }
+        console.log(arr2, arr2.length);
+        // 案例6 删除指定数组元素  要求: 将下列数组中的0去掉后,形成一个不包含0的新数组
+        var arr = [2, 0, 6, 1, 77, 0, 52, 0, 25, 7];
+        var newArr = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] != 0) {
+                newArr[newArr.length] = arr[i];
+            }
+        }
+        console.log(newArr);
+        // 案例7 翻转数组   要求: 将下列数组的内容反过来存放
+        var arr = ['red', 'green', 'blue', 'pink'];
+        var newArr = [];
+        for (var i = arr.length - 1;i >= 0; i--) {
+            newArr[newArr.length] = arr[i];
+        }
+        console.log(newArr);
+        // 案例8 数组排序(冒泡排序)  是一种算法,把一系列的数据按照一定的顺序进行排列显示(从小到大或从大到小)
+        var arr = [5,4,3,2,1];
+        // var temp = 0;
+        for (var i = 0; i < arr.length-1; i++) {       // 外层循环控制需要的趟数 长度就是length-1
+            // -i是因为每次内循环后会确定一个最大的值在后面,无需再和前面的作比较
+            for(var j = 0; j < arr.length - i - 1; j++){        // 里层循环控制每一趟交换次数
+                if(arr[j] > arr[j+1]){
+                    // 交换两个变量的值
+                    // temp = arr[j];
+                    // arr[j] = arr[j+1];
+                    // arr[j+1] = temp;
+                    arr[j] = arr[j] + arr[j+1] - (arr[j+1] = arr[j]);
+                }
+            }
+        }
+        console.log(arr);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

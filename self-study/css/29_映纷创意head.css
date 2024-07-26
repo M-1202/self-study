@@ -1,0 +1,54 @@
+/* 样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+body {
+    background-color: #f2f2f2;
+    font-size: 16px;
+    font-family: Microsoft yahei;
+}
+.head {
+    /* 固定定位 */
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    width: 100%;
+    height: 70px;
+    /* padding-top: 5px; */
+    color: #adadad;
+    background-color: #000;
+    /* 设置头部的透明度 */
+    opacity: 0.75;
+    /* 内容文本水平居中 */
+    /* text-align: center; */
+    /* 盒子阴影 */
+    box-shadow: 0 4px 4px rgb(0 0 0 /50%);
+    min-width: 800px;
+}
+.head .logo {
+    display: block;
+    width: 110px;
+    height: 32px;
+    margin: 5px auto;
+}
+.head .nav {
+    width: 80%;
+    margin: auto;
+    /* 设置文字水平居中 */
+    text-align: center;
+    font-size: 13px;
+}
+.head .nav a {
+    display: inline-block;
+    color: #898989;
+    /* 给每个a标签加一个外边距 */
+    margin: 5px 5%;
+}
+.head .nav a:hover {
+    color: white;
+}
+.head .nav .first {
+    color: white;
+}

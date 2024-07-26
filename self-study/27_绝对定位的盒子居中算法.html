@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绝对定位的盒子居中算法</title>
+    <style>
+        .box {
+            /* 绝对定位 */
+            position: absolute;
+            /* 1.让盒子跑到可视区域x轴中间 */
+            left: 50%;
+            /* 3.让盒子跑到可视区域y轴中间 */
+            top: 50%;
+            /* 2.再向左移动盒子宽一半距离，实现水平居中 */
+            margin-left: -100px;
+            /* 4.再向上移动盒子高一半距离,实现垂直居中 */
+            margin-top: -100px;
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+</html>

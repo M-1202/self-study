@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圆角边框</title>
+    <!-- 
+        在css3中,新增了圆角边框样式,这样我们的盒子就可以变圆角了。
+        border-radius属性用于设置元素的外边框圆角。
+        语法:
+        border-radius: length;
+        radius半径(圆的半径)原理:(椭)圆与边框的交集形成圆角效果
+        1.参数值可以为数值或百分比的形式
+        2.如果是正方形,想要设置为一个圆,把数值修改为高度或者宽度的一半即可,或者直接写为50%
+        3.如果是矩形,设置为高度的一半就可以做
+        4.该属性是一个简写属性,可以跟四个值，分别代表左上角、右上角、右下角、左下角
+     -->
+    <style>
+        .yuanxing {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            /* border-radius: 100px; */
+            border-radius: 50%;
+        }
+        .jvxing {
+            width: 400px;
+            height: 200px;
+            background-color: red;
+            border-radius: 100px;
+        }
+        .radius {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            border-radius: 10px 20px 30px 40px;
+        }
+    </style>
+</head>
+<body>
+    1.圆形的做法:
+    <div class="yuanxing"></div>
+    2.圆角矩形的做法:
+    <div class="jvxing"></div>
+    3.可以设置不同的圆角:
+    <div class="radius"></div>
+</body>
+</html>

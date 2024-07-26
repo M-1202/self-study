@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>异常处理</title>
+</head>
+<body>
+    <p>123</p>
+    <script>
+        // 1. throw 抛异常
+        // function fn1(x,y){
+        //     if(!x || !y){
+        //         throw new Error('缺少参数传入')
+        //     }
+        //     return x + y
+        // }
+        // console.log(fn1())
+
+        // 2. try...catch...finally
+        function fn2 (){
+            // debugger
+            try {
+                const p = document.querySelector('.p')
+                p.style.color = 'red'
+            }catch(err){
+                // 不会终止程序
+                console.log(err.message)
+                // 可以和throw搭配使用
+                throw new Error('有错误')
+            }
+            // 不管上面的代码对不对 finally 里的代码一定会执行的
+            finally{
+                alert('我一定会出现的')
+            }
+        }
+        fn2()
+
+
+        // 3. debugger 在代码中打一个断点
+    </script>
+</body>
+</html>

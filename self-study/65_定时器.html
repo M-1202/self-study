@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定时器</title>
+    <!-- 
+        <间歇函数>
+        定时器函数可以开启和关闭定时器
+        1. 开启定时器
+        setInterval(函数,间隔时间)
+        注意: 1. 每隔一段时间调用这个函数
+              2. 函数: 可以是匿名函数  也可以是一个函数名 不用加()
+              3. 间隔时间: 单位是 ms
+              4. 定时器返回的是一个  id数字
+        2. 关闭定时器
+            let 变量名 = setInterval(函数,间隔时间)
+            clearInterval(变量名)
+        <延迟函数>
+        JS内置的一个用来让代码延迟执行的函数，叫setTimeout
+        1. 语法: setTimeout(回调函数,等待的毫秒数)
+            setTimeout仅仅只执行一次，所以可以理解为就是把一段代码延迟执行
+        2. 清除延迟函数: 
+            let timer = setTimeout(回调函数,等待的毫秒数)
+            clearTimeout(timer)
+            注意点: 
+            1. 延迟函数需要等待，所以后面的代码先执行
+            2. 每一次调用延时器都会产生一个新的延时器
+        <区别>
+        两种定时器对比: 执行次数
+        间歇函数: 每隔一段时间就执行一次，除非手动清除
+        延迟函数: 执行一次
+     -->
+
+</head>
+<body>
+    <script>
+        // 间歇定时器
+        // 开启定时器
+        let id = setInterval(
+            function () {
+                console.log('每一秒打印一次');
+            }
+        ,1000)
+        console.log(id);    // 打印返回值
+        // 关闭定时器
+        clearInterval(id)
+
+        // 延迟定时器
+        // 开启
+        let timer = setTimeout(
+            function(){
+                console.log('两秒后打印');
+            },2000)
+        // 关闭
+        clearTimeout(timer)
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五彩导航</title>
+    <style>
+        /* 公共类设置共同的样式 */
+        .a {
+            /* 将a标签转变为行内块元素 */
+            display: inline-block;
+            /* 设置宽高 */
+            width: 120px;
+            height: 58px;
+            /* border: red 1px solid; */
+            /* 去除a链接自带的下划线 */
+            text-decoration: none;
+            
+            /* 水平居中 */
+            text-align: center;
+            /* 去掉下面尖端区的垂直居中 */
+            line-height: 50px;
+            color: white;
+        }
+        /* 自己独特的类设置自己独特的样式 */
+        .one {
+            background-image: url(img/五彩导航1.jpg);
+            /* 取消背景图片平铺 */
+            background-repeat: no-repeat;
+        }
+        .two {
+            background-image: url(img/五彩导航2.jpg);
+            background-repeat: no-repeat;
+        }
+        .three {
+            background-image: url(img/五彩导航3.jpg);
+            background-repeat: no-repeat;
+        }
+        .four {
+            background-image: url(img/五彩导航4.jpg);
+            background-repeat: no-repeat;
+        }
+        /* 设置每个a链接的鼠标悬浮效果:鼠标悬浮改变背景图片 */
+        .one:hover {
+           background-image: url(img/五彩导航2.jpg);
+        }
+        .two:hover {
+            background-image: url(img/五彩导航3.jpg);
+        }
+        .three:hover {
+            background-image: url(img/五彩导航4.jpg);
+        }
+        .four:hover {
+            background-image: url(img/五彩导航1.jpg);
+        }
+    </style>
+</head>
+<body>
+    <!-- 使用多类名的选择器 -->
+    <a href="#" class="a one">五彩导航</a>
+    <a href="#" class="a two">五彩导航</a>
+    <a href="#" class="a three">五彩导航</a>
+    <a href="#" class="a four">五彩导航</a>
+</body>
+</html>

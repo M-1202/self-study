@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浮动</title>
+    <!-- 
+        <浮动>
+        float属性用于创建浮动框,将其移动到一边,直到左边缘或右边缘触及包含块或另一个浮动框的边缘
+        语法:
+        选择器 {float: 属性值;}
+        属性值:
+        none     元素不浮动(默认值)
+        left     元素向左浮动
+        right    元素向右浮动
+     -->
+    <!-- 
+        <浮动特性>
+        1.浮动元素会脱离标准流(脱标),且不再保留原先的位置(重要)
+        2.浮动的元素会一行内显示并且元素顶部对齐
+        3.浮动的元素会具有行内块元素的特性
+        注意:
+        1.浮动的元素是互相贴靠在一起的(不会有缝隙),如果父级宽度装不下这些浮动的盒子,多出的盒子会另起一行对齐
+        2.为了约束浮动元素的位置,一般先用标准流的父元素排列上下位置,之后内部子元素采取浮动排列左右位置
+        3. 一个元素浮动了,理论上其余的兄弟元素也要浮动
+        4.浮动的盒子只会影响浮动盒子后面的标准流,不会影响前面的标准流(重要)
+     -->
+    <style>
+        /* .left,
+        .right {
+            width: 200px;
+            height: 200px;
+            background-color: purple;
+            float: left;
+        }
+        .right {
+            float: right;
+        } */
+        /* 注意4验证 */
+        .box {
+            width: 800px;
+            height: 400px;
+            background-color: pink;
+            margin: 0 auto;
+        }
+        /* 大毛浮动  大毛会影响后面的标准流二毛,从而压着二毛显示*/
+        .box .damao {
+            float: left;
+            width: 100px;
+            height: 100px;
+            background-color: purple;
+        }
+        /* 二毛不浮动 标准流 */
+        .box .ermao {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+        /* 三毛浮动   三毛不会影响前面的标准流二毛,从而换行显示*/
+        .box .sanmao {
+            float: left;
+            width: 100px;
+            height: 100px;
+            background-color: purple;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="left">左青龙</div>
+    <div class="right">右白虎</div> -->
+    <div class="box">
+        <div class="damao">大毛</div>
+        <div class="ermao">二毛</div>
+        <div class="sanmao">三毛</div>
+    </div>
+</body>
+</html>

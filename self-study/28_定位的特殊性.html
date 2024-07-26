@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定位的特殊性</title>
+    <!-- 
+        <定位的特殊性>
+        绝对定位和固定定位也和浮动类似 (具有行内块元素的特性)
+        1.行内元素添加绝对或者固定定位,可以直接设置高度和宽度
+        2.块级元素添加绝对或者固定定位,如果不给宽度或者高度,默认大小是内容的大小
+        3.脱标的盒子不会触发外边距塌陷
+        4.绝对定位(固定定位)会完全压住盒子
+          浮动元素不同,只会压住它下面标准流的盒子,但是不会压住标准流盒子里面的文字(图片)
+          但是绝对定位(固定定位)会压住下面标准流所有的内容
+          浮动之所以不会压住文字,因为浮动产生的目的最初是为了做文字环绕效果的,文字会围绕浮动元素
+     -->
+    <style>
+        .box {
+            /* 浮动元素不会压住标准流盒子里面的文字 */
+            /* float: left; */
+            /* 绝对定位(固定定位)会压住标准流盒子里面的文字 */
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: purple;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <p>我自横刀向天笑,去留肝胆两昆仑</p>
+</body>
+</html>

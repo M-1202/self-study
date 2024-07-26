@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基础选择器</title>
+    <!-- 
+        基础选择器：
+        1.标签选择器
+        2.类选择器
+        3.id选择器
+        4.通配符选择器
+     -->
+    <style>
+        /* 标签选择器 */
+        p {
+            color: red;
+        }
+        /* 类选择器：样式点定义 结构类（class）调用 一个或多个 开发最常用 */
+        .blue {
+            color: blue;
+        }
+        /*
+        类选择器-多类名:
+        1.可以把一些标签元素相同的样式（共同部分）放到一个类里面
+        2.这些标签都可以调用这个公共的类，然后再调用自己独有的类
+        3.从而节省css代码，统一修改也非常方便
+         */
+        .box {
+            width: 200px;
+            height: 200px;
+        }
+        .red {
+            background-color: red;
+        }
+        .green {
+            background-color: green;
+        }
+        /* id选择器(唯一标识)：样式#定义，结构id调用，只能调用一次，别人切勿使用*/
+        #pink {
+            background-color: pink;
+            width: 200px;
+            height: 200px;
+        }
+        /* 通配符标签：选择所有标签（*） */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <p>男生</p> 
+    <ul>
+        <li class="blue">斗破苍穹</li>
+        <li>斗罗大陆</li>
+        <li class="blue">大主宰</li>
+    </ul>
+    <div class="box red">红色</div>
+    <div class="box green">绿色</div>
+    <div class="box red">红色</div>
+    <div id="pink">大帅哥</div>
+</body>
+</html>

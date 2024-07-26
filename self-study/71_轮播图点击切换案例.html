@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图点击切换</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .slider {
+            width: 560px;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .slider-wrapper {
+            width: 100%;
+            height: 320px;
+        }
+
+        .slider-wrapper img {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .slider-footer {
+            height: 80px;
+            background-color: rgb(100, 67, 68);
+            padding: 12px 12px 0 12px;
+            position: relative;
+        }
+
+        .slider-footer .toggle {
+            position: absolute;
+            right: 0;
+            top: 12px;
+            display: flex;
+        }
+
+        .slider-footer .toggle button {
+            margin-right: 12px;
+            width: 28px;
+            height: 28px;
+            appearance: none;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .slider-footer .toggle button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .slider-footer p {
+            margin: 0;
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .slider-indicator {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .slider-indicator li {
+            width: 8px;
+            height: 8px;
+            margin: 4px;
+            border-radius: 50%;
+            background: #fff;
+            opacity: 0.4;
+            cursor: pointer;
+        }
+
+        .slider-indicator li.active {
+            width: 12px;
+            height: 12px;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider">
+        <div class="slider-wrapper">
+            <img src="./img/IU(0).jpg" alt="">
+        </div>
+        <div class="slider-footer">
+            <p>对人类来说会不会太超前了？</p>
+            <ul class="slider-indicator">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <div class="toggle">
+                <button class="prev">&lt;</button>
+                <button class="next">&gt;</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 1. 初始数据
+        const sliderData = [
+            { url: './img/IU(0).jpg', title: '对人类来说会不会太超前了？', color: 'rgb(100, 67, 68)' },
+            { url: './img/IU(1).jpg', title: '开启剑与雪的黑暗传说！', color: 'rgb(43, 35, 26)' },
+            { url: './img/IU(2).jpg', title: '谁不想和小猫咪贴贴呢！', color: 'rgb(36, 31, 33)' },
+            { url: './img/IU(3).jpg', title: '快来分享你的寒假日常吧~', color: 'rgb(139, 98, 66)' },
+            { url: './img/IU(4).jpg', title: '哔哩哔哩小年YEAH', color: 'rgb(166, 131, 143)' }
+        ]
+        const box = document.querySelector('.slider')
+        const gt = document.querySelector('.slider-footer .toggle .next')
+        const lt = document.querySelector('.slider-footer .toggle .prev')
+        const img = document.querySelector('.slider-wrapper img')
+        const p = document.querySelector('.slider-footer p')
+        const sf = document.querySelector('.slider-footer')
+        let i = 0
+        // 2. 设置右按钮点击事件
+        gt.addEventListener('click', function () {
+            i++
+            if (i >= sliderData.length) {
+                i = 0
+            }
+            render()
+        })
+
+        // 3. 设置左按钮点击事件
+        lt.addEventListener('click', function () {
+            i--
+            if (i < 0) {
+                i = sliderData.length - 1
+            }
+            render()
+        })
+
+        // 给小圆点添加一个点击事件   利用for循环
+        // 有bug  点击小圆点事件可以实现 但此时左右按钮点击事件有影响  想法: 应该有一个实时变化的计数器i 来判断当前小圆点的位置 
+        // const lis = document.querySelectorAll('.slider-footer .slider-indicator li')
+        // for( let i = 0; i < lis.length; i++){
+        //     lis[i].addEventListener('click',function(){
+        //         // 渲染对应的数据
+        //         img.src = sliderData[i].url
+        //         p.innerHTML = sliderData[i].title
+        //         sf.style.backgroundColor = sliderData[i].color
+        //         // 当前小圆点高亮
+        //         document.querySelector('.slider-footer .active').classList.remove('active')
+        //         // this.classList.add('active')
+        //         document.querySelector(`.slider-footer .slider-indicator li:nth-child(${i + 1})`).classList.add('active')
+        //         // render()     为什么这里调用函数不起作用???
+        //     })
+        // }
+
+        // 4. 开启定时器 每隔2s自动播放
+        let timerId = setInterval(function(){
+            // 它的事件和点击右按钮事件一样
+            // 利用js自动调用右按钮点击事件
+            // 右按钮点击事件相当于 gt.onclick = function(){} 
+            gt.click()      // 右按钮的函数调用
+        },2000)
+
+        //  给大盒子添加 鼠标经过 和 鼠标离开事件
+        // 5. 鼠标经过 停止计时器 
+        box.addEventListener('mouseenter',function(){
+            // 停止计时器
+            clearInterval(timerId) 
+        })
+        // 6. 鼠标离开 开启计时器
+        box.addEventListener('mouseleave',function(){
+            timerId = setInterval(function () {
+                gt.click()      
+            }, 2000)
+        })
+
+        // 声明一个渲染数据的函数 作为复用
+        function render() {
+            // 2.1 渲染对应的数据
+            //      切换图片
+            img.src = sliderData[i].url
+            //      更换文字
+            p.innerHTML = sliderData[i].title
+            //      更换下部分的背景颜色
+            sf.style.backgroundColor = sliderData[i].color
+            // 2.2 将下面的小圆点与之对应切换
+            // 排他思想
+            // 先干掉所有   移除active类
+            document.querySelector('.slider-footer .active').classList.remove('active')
+            // 自己添加         添加active类
+            document.querySelector(`.slider-footer .slider-indicator li:nth-child(${i + 1})`).classList.add('active')
+        } 
+    </script>
+</body>
+
+</html>

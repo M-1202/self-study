@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内置构造函数</title>
+</head>
+
+<body>
+    <script>
+        // 1. Object
+        //   静态方法
+        const o = {
+            uname: 'pink',
+            age: 18
+        }
+        // 1.1 Object.keys()    返回的是一个数组
+        // 获得所有的属性名
+        console.log(Object.keys(0))
+        // 1.2 Object.values()    返回的是一个数组
+        // 获得所有的属性值
+        console.log(Object.values(0))
+        // 1.3 Object.assign() 浅拷贝
+        const obj = {}
+        Object.assign(obj, o)
+        console.log(obj)
+        // 给对象添加属性
+        Object.assign(obj, { gender: '男' })
+        console.log(obj)
+        console.log(o)
+
+        // 2. Array
+        // 实例方法
+        // 2.1 forEach()    遍历数组 无返回值
+        // 2.2 map()        迭代数组 返回处理后的新数组
+        // 2.3 filter()     过滤数组 返回满足条件的新数组
+        // 2.4 reduce()     累计器   返回累计处理的结果
+        // 语法: arr.reduce(function(上一次的值,当前值){},初始值)
+        // reduc执行过程
+        // 1. 如果没有起始值，则上一次值是数组的第一个值
+        // 2. 每一次循环，把返回值作为下一次循环的上一次值
+        // 3. 如果有起始值，则起始值作为上一次值
+
+        const arr = [1, 5, 8]
+
+        // (1) 没有初始值
+
+        // const total = arr.reduce(function(prev,current){
+        //     return prev + current
+        // })
+        // console.log(total)   // 14
+
+        // 换成箭头函数
+        // const total = arr.reduce((prev,current) => prev + current)
+        // console.log(total)   // 14
+
+
+        // (2) 有初始值
+
+        // const total = arr.reduce(function (prev, current) {
+        //     return prev + current
+        // },10)
+        // console.log(total)      // 24
+
+        // 换成箭头函数
+        const total = arr.reduce((prev, current) => prev + current,10)
+        console.log(total)   // 24
+
+        // 2.5 join()   数组元素拼接成字符串    返回字符串
+        // 2.6 find()   查找数组    返回符合条件的第一个数组元素 如果没有符合条件的则返回undefined
+        // 2.7 every()  检测数组所有元素是否都符合指定条件，如果所有元素都符合条件则返回true，否则返回false
+        // 2.8 some()   检测数组中的元素是否满足指定条件，如果数组中有元素满足条件返回true，否则返回false
+
+
+        // 3. String
+        // 实例方法
+        // 3.1 split('分隔符')  将字符串拆分成数组 返回值是数组
+        // 3.2 substring(截取第一个字符的索引号,[,结束的索引号])    用于字符串截取  返回值是字符串  前开后闭 [)
+        // 3.3 startsWith(检测字符串[,检测位置索引号])      检测是否以某字符开头    返回值是布尔值
+        // 3.4 includes(搜索的字符串[,检测位置索引号])      判断一个字符串是否包含在另一个字符串中，根据情况返回true或false
+
+
+
+        // 4. Number
+        // 实例方法
+        // 4.1 toFixed()    保留小数位的长度  四舍五入
+        const num = 100
+        console.log(num.toFixed(1)) // 100.0
+    </script>
+</body>
+
+</html>

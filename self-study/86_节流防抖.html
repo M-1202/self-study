@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>节流防抖</title>
+</head>
+<style>
+    .box {
+        width: 500px;
+        height: 500px;
+        background-color: #ccc;
+        color: #fff;
+        text-align: center;
+        font-size: 100px;
+    }
+</style>
+
+<body>
+    <div class="box"></div>
+    <script src="lodash.min.js"></script>
+    <script>
+        // 1. 防抖
+        // 单位时间内，频繁触发事件，只执行最后一次
+
+        // 利用防抖实现性能优化
+        // 需求: 鼠标在盒子上移动，里面的数字就会变化 +1
+        const box = document.querySelector('.box')
+        let i = 1
+        // 事件处理函数
+        function mouseMove() {
+            box.innerHTML = i++
+        }
+        // 添加事件
+        // box.addEventListener('mousemove',mouseMove)
+
+        // 1.1 利用lodash库提供的防抖函数
+        // 实现防抖  500毫秒之后 +1
+        // 语法: _.debounce(fun,时间)
+        // box.addEventListener('mousemove',_.debounce(mouseMove,500))
+
+
+        // 1.2 手写一个防抖函数 核心: 利用setTimeout定时器
+        // 注意: 这个防抖函数 返回的是一个匿名函数  把(2.3.4.)写在匿名函数里
+
+
+        // 核心思路:
+        // 1. 声明一个定时器变量
+        // 2. 每次事件触发就先判断是否有定时器，如果有就先清除
+        // 3. 如果没有就开启定时器  记得存到变量里
+        // 4. 定时器里调用要执行的函数
+
+        // function debounce (fun,t){
+        //     let timer
+        //     return function(){
+        //         if(timer) clearTimeout(timer)
+        //         timer = setTimeout(function(){
+        //             fun()
+        //         },t)
+        //     }
+        // }
+        // box.addEventListener('mousemove',debounce(mouseMove,500))
+
+
+
+        // 2. 节流  throttle
+        // 单位时间内，频繁触发事件，只执行一次
+
+        // 需求: 鼠标在盒子上移动，不管移动多少次，每隔500ms 才 +1
+
+        // 2.1 利用lodash库提供的节流函数
+        // 语法: _.throttle(fun,时间)
+        // box.addEventListener('mousemove',_.throttle(mouseMove,500))
+
+        // 2.2 手写一个节流函数 核心: 利用setTimeout定时器
+        // 注意: 这个节流函数 返回的是一个匿名函数  把(2.3.4.)写在匿名函数里
+
+        // 核心思路:
+        // 1. 声明一个定时器变量
+        // 2. 每次事件触发就先判断是否有定时器，如果有就不开启新的定时器
+        // 3. 如果没有就开启定时器，记得存到变量里
+        // 4. 定时器里调用执行的函数，并且还要把定时器情况  在定时器里清空定时器用 timer = null
+        function throttle(fun,t){
+            let timer
+            return function(){
+                // 没有定时器
+                if(!timer){
+                    timer = setTimeout(function(){
+                        fun()
+                        // 清空定时器
+                        timer = null
+                    },t)
+                }
+            }
+        }
+        box.addEventListener('mousemove',throttle(mouseMove, 500))
+
+    </script>
+</body>
+
+</html>

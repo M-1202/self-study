@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise链式调用</title>
+</head>
+
+<body>
+    <form>
+        <span>省份：</span>
+        <select>
+            <option class="province"></option>
+        </select>
+        <span>城市：</span>
+        <select>
+            <option class="city"></option>
+        </select>
+        <span>地区：</span>
+        <select>
+            <option class="area"></option>
+        </select>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // 1. 回调函数地狱
+        /**
+         * 目标：演示回调函数地狱
+         * 需求：获取默认第一个省，第一个市，第一个地区并展示在下拉菜单中
+         * 概念：在回调函数中嵌套回调函数，一直嵌套下去就形成了回调函数地狱
+         * 缺点：可读性差，异常无法获取，耦合性严重，牵一发动全身
+        */
+
+        // 1.1 获取默认第一个省份的名字
+        // axios({ url: 'http://hmajax.itheima.net/api/province' }).then(result => {
+        //     const pname = result.data.list[0]
+        //     document.querySelector('.province').innerHTML = pname
+        //     // 1.2 获取默认第一个城市的名字
+        //     axios({ url: 'http://hmajax.itheima.net/api/city', params: { pname } }).then(result => {
+        //         const cname = result.data.list[0]
+        //         document.querySelector('.city').innerHTML = cname
+        //         // 1.3 获取默认第一个地区的名字
+        //         axios({ url: 'http://hmajax.itheima.net/api/area', params: { pname, cname } }).then(result => {
+        //             console.log(result)
+        //             const areaName = result.data.list[0]
+        //             document.querySelector('.area').innerHTML = areaName
+        //         })
+        //     })
+        // }).catch(error => {
+        //     console.dir(error)
+        // })
+
+        // 2. promise链式调用
+        /**
+         * 目标：把回调函数嵌套代码，改成Promise链式调用结构
+         * 需求：获取默认第一个省，第一个市，第一个地区并展示在下拉菜单中
+         * 细节: then()返回的新promise对象受 then()回调函数中返回值的影响  返回值是(1) promise对象 (2) 普通值
+        */
+        let pname = ''
+        // 2.1 获取默认第一个省份的名字
+        axios({ url: 'http://hmajax.itheima.net/api/province' }).then(result => {
+            pname = result.data.list[0]
+            // console.log(pname)
+            document.querySelector('.province').innerHTML = pname
+            // 返回值是(1) promise对象
+            // 返回值是一个promise对象  粗略理解为then()函数返回的新promise就是这个对象
+            return axios({ url: 'http://hmajax.itheima.net/api/city', params: { pname } })
+            // 2.2 获取默认第一个城市的名字
+        }).then(result => {
+            const cname = result.data.list[0]
+            document.querySelector('.city').innerHTML = cname
+            return axios({ url: 'http://hmajax.itheima.net/api/area', params: { pname, cname } })
+            // 1.3 获取默认第一个地区的名字
+        }).then(result => {
+            const areaName = result.data.list[0]
+            document.querySelector('.area').innerHTML = areaName
+        })
+
+        // 返回值是(2) 普通值
+        // const p1 = new Promise((resolve, reject) => {
+        //     resolve('执行成功-01')
+        // }).then((result) => {
+        //     console.log(result)     // 执行成功-01
+        //     return result + '-02' // 作为then()返回新对象中resolve() 的参数 即下一个then()回调函数里的参数
+        // }).then(result => {
+        //     console.log(result)     // 执行成功-01-02
+        //     return result + '-03'
+        // }).then(result => {
+        //     console.log(result)     // 执行成功-01-02-03
+        // })
+
+
+    </script>
+</body>
+
+</html>

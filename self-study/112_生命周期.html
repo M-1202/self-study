@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命周期</title>
+</head>
+<body>
+    <div id="App">
+        <h1>当前n值:{{ n }}</h1>
+        <button @click="add">按钮+1</button>
+        <button @click="bye">点击销毁vm</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#App',
+            data: {
+                n:1
+            },
+            methods:{
+                add(){
+                    this.n++
+                },
+                bye(){
+                    console.log('bye');
+                    this.$destroy()
+                }
+            },
+            
+            // 1. 创建前
+            beforeCreate(){
+                console.log('beforeCreate')
+                // console.log(this)
+                // debugger
+            },
+            // 2. 创建后
+            created(){
+                console.log('created')
+                // console.log(this)
+                // debugger
+            },
+            // 3. 挂载前
+            beforeMount(){
+                console.log('beforeMount')
+                // console.log(this.$el)
+            },
+            // 4. 挂载后
+            mounted(){
+                console.log('mounted')
+                // console.log(this.$el)
+            },
+            // 5. 更新前
+            beforeUpdate(){
+                console.log('beforeUpdate')
+                // console.log(this.n)     // 此时数据是新的，但页面是旧的     页面和数据不同步
+                // debugger
+            },
+            // 6. 更新后
+            updated() {
+                console.log('updated')
+                // console.log(this.n)     // 此时数据是新的，页面也是新的     页面和数据同步
+                // debugger
+            },
+            // 7. 销毁前
+            beforeDestroy(){
+                console.log('beforeDestroy')
+            },
+            // 8. 销毁后
+            destroyed(){
+                console.log('destroyed')
+            }
+        })
+    </script>
+</body>
+</html>

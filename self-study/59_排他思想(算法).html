@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>排他思想(算法)</title>
+    <!-- 
+        排他思想:如果有同一组元素,我们想要某一个元素实现某种样式,需要用到循环的排他思想算法
+        1.所有元素全部消除样式(干掉其他人)
+        2.给当前元素设置样式(留下我自己)
+        3.注意顺序不能颠倒,首先干掉其他人,再设置自己
+     -->
+</head>
+<body>
+    <button>按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+    <button>按钮4</button>
+    <button>按钮5</button>
+     <script>
+        // 1.获取所有的按钮元素
+        var btns = document.getElementsByTagName('button');
+        // btns得到的是伪数组 里面的每一个元素是用btns[i]
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].onclick = function(){
+                // (1) 我们先把所有的按钮背景颜色去掉
+                for (var i = 0; i < btns.length; i++) {
+                    btns[i].style.backgroundColor = '';
+                }
+                // (2) 然后才让当前按钮的背景颜色变为pink
+                this.style.backgroundColor = 'pink';
+            }
+        }
+     </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件对象</title>
+    <!-- 
+        <事件对象是什么>
+            也是个对象，这个对象里有事件触发时的相关信息
+        <使用场景>
+            可以判断用户按下了哪个键，判断鼠标点击哪个元素 从而做相应的操作
+        1. 语法:    元素.addEventListener('事件类型',function(e){})
+            注意: 在事件绑定的回调函数的第一个参数就是事件对象，一般命名为event、ev、e
+        2. 部分常用属性
+            type    获取当前的事件类型
+            clientX/clientY 获取光标相对于浏览器可视窗口左上角的位置
+            offsetX/offsetY 获取光标相对于当前DOM元素左上角的位置
+            key 用户按下的键盘键的值
+     -->
+</head>
+<body>
+    <button>点击</button>
+    <input type="text">
+    <script>
+        // 获取元素对象
+        const btn = document.querySelector('button')
+        // 给对象注册事件
+        btn.addEventListener('click',function(e){
+            console.log(e)
+        })
+
+        const input = document.querySelector('input')
+        input.addEventListener('keyup',function(e){
+            if(e.key === 'Enter'){
+                console.log('我按下了回车键')
+            }
+        })
+    </script>
+</body>
+</html>

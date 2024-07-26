@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XMLHttpRequest_数据提交</title>
+</head>
+
+<body>
+    <button class="reg-btn">注册用户</button>
+    <script>
+        /**
+         * 目标：使用xhr进行数据提交-完成注册功能
+        */
+
+        // 按钮->点击
+        // document.querySelector('button').addEventListener('click', () => {
+        //     const xhr = new XMLHttpRequest()
+        //     xhr.open('post', 'http://hmajax.itheima.net/api/register')
+        //     xhr.addEventListener('loadend', () => {
+        //         console.log(xhr.response)
+        //     })
+
+        //     // 设置请求头-告诉服务器内容类型（JSON字符串）
+        //     xhr.setRequestHeader('Content-Type', 'application/json')
+        //     // 准备数据并转为JSON字符串
+        //     const user = { username: 'xmxx1202', password: '147258369' }
+        //     const userStr = JSON.stringify(user)
+        //     // 发送请求体数据
+        //     xhr.send(userStr)
+        // })
+
+
+        /**
+         * 目标：封装_简易axios函数_注册用户
+         *  1. 判断有data选项，携带请求体
+         *  2. 转换数据类型，在send中发送
+         *  3. 使用myAxios函数，完成注册用户
+        */
+        function myAxios(obj) {
+            return new Promise((resolve, reject) => {
+                // 创建xhr对象
+                const xhr = new XMLHttpRequest()
+                
+                // (1) 判断有params选项，携带查询参数
+                if (obj.params) {
+                    // (2) 使用URLSearchParams转换，并携带到url上
+                    const paramsObj = new URLSearchParams(obj.params)
+                    const queryString = paramsObj.toString()
+                    // 把查询参数字符串，拼接在url？后面
+                    obj.url += `?${queryString}`
+                }
+                // 配置请求方法和url地址
+                xhr.open(obj.method || 'GET',obj.url)
+                xhr.addEventListener('loadend',() => {
+                    // 判断是否请求成功  通过xhr.status状态码
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        resolve(JSON.parse(xhr.response))
+                    } else {
+                        reject(new Error(xhr.response))
+                    }
+                })
+                // 判断是否有data选项，携带请求体
+                if(obj.data){
+                    // 转换数据类型，在send中发送
+                    const jsonStr = JSON.stringify(obj.data)
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                    xhr.send(jsonStr)
+                }else{
+                    // 如果没有请求体数据，正常的发起请求
+                    xhr.send()
+                }
+            })
+        }
+        // 按钮->点击
+        document.querySelector('button').addEventListener('click',() => {
+            myAxios({
+                url: 'http://hmajax.itheima.net/api/register',
+                method: 'post',
+                data: {
+                    username: 'xmxx0101',
+                    password: '147258369'
+                }
+            }).then(result => {
+                console.log(result)
+            }).catch(error => {
+                console.dir(error)
+            })
+        })
+    </script>
+</body>
+
+</html>

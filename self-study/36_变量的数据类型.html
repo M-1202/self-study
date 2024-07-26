@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>变量的数据类型</title>
+    <!-- 
+        1.变量是用来存储值的所在处，它们有名字和数据类型。变量的数据类型决定了如何将代表这些值的位存储到计算机的内存中。JavaScript是一种弱类型或者说动态语言。这意味着不用提前声明变量的类型，在程序运行过程中,类型会被自动确定。
+     -->
+    <!-- 
+        2.数据类型的分类:
+            简单数据类型（Number、String、Boolean、Undefined、Null）
+            复杂数据类型（object）
+     -->
+    <script>
+        // var num;     这里的num我们不确定属于哪种数据类型
+        // 在代码运行时，变量的数据类型是由JS引擎根据 = 右边变量的数据类型来判断的，运行完毕之后，变量就确定了数据类型。
+        var num = 10;       // num 属于数字型
+        var str = 'pink';   // str 属于字符串型
+        // JavaScript 拥有动态类型，同时意味着相同的变量可用作不同的类型
+        var a = 10;         // a 属于数字型
+        var a = 'pink';     // a 属于字符串型
+        console.log(a);
+        // 2.1 数字型Number
+        //      JS数字类型既可以用来保存整数值，也可以保存小数（浮点数）
+        var age = 22;   // 整数
+        var PI = 3.14;  // 小数
+        // 1. 八进制    0~7 我们程序里面数字前面加 0 或 0o 表示八进制
+        var num1 = 0o10;
+        console.log(num1); // 010 八进制 转换为 10进制 就是 8  输出的是十进制
+        // 2. 十六进制 0~9 a~f  数字前面加 0x 表示十六进制
+        var num2 = 0x9;
+        console.log(num2);
+        // 3. isNaN() 这个方法用来判断非数字    并且返回一个值 如果是数字返回 false 反之返回true
+        console.log(isNaN(10)); // false
+        console.log(isNaN('我是字符串'));   // true
+        // 2.2 字符串型 String
+        //      字符串型可以是引号中的任意文本，其语法为双引号""和单引号''  JS更推荐使用单引号
+        // 1. 字符串转义符  转义符都是 \ 开头的
+        //      \n 换行符   \\ 斜杠\    \' 单引号   \" 双引号   \t tab缩进  \b 空格
+        // 2. 字符串长度
+        //      字符串是由若干字符组成的，这些字符的数量就是字符串的长度，通过字符串的length属性可以获取整个字符串的长度
+        var str = '我是五个字';
+        console.log(str.length);  // 显示 5
+        // 3. 字符串的拼接 +        字符串型 + 其它类型 = 字符串型
+        console.log('我是' + '大帅哥');
+        console.log('我' + 18);     // 我18
+        // 2.3 布尔型 Boolean
+        //      布尔类型有两个值：true 和 false
+        //      布尔型和数字型相加的时候    true的值为1 false的值为0
+        var flag = true;
+        var flag1 = false;
+        console.log(flag + 0);  // 1
+        console.log(flag1 + 0); // 0
+        // 2.4 Undefined  一个声明后没有被赋值的变量会有一个默认值Undefined
+        // 2.5 Null 里面存的值为空
+        // 3. typeof 检测变量数据类型
+        var n1 = 18;
+        console.log(typeof n1); // number
+        var str1 = '字符串';
+        console.log(typeof str1);   // string
+        //      prompt 取来的值是字符型
+        var age = prompt('请输入你的年龄:');
+        console.log(typeof age);    // string
+        // 4.1 数据类型转换     使用表单、prompt获取过来的数据默认是字符串类型的，此时就不能直接简单的进行加法运算，而需要转换变量的数据类型。通俗来说，就是把一种数据类型的变量转换成另外一种数据类型。
+        // 4.2 转换为字符串类型
+        //      1.变量名.toString()
+        var num1 = 18;
+        var str1 = num1.toString();
+        console.log(typeof str1);   // string
+        //      2.String()强制转换  
+        var str2 = String(num1);
+        console.log(str2);
+        console.log(typeof str2);   // string
+        //      3.加号拼接字符串 （重要）
+        console.log(num1 + '');     // 黑色 字符串型
+        // 4.3 转换为数字型
+        //      1.parseInt(string)函数  将string类型转换为整数数字型
+        console.log(parseInt(str1));    // 蓝色 数字型
+        var id = parseInt(prompt('请输入你的学号'));
+        console.log(typeof id); // number
+        //      2.parseFloat(string)函数    将string类型转换为浮点数数字型
+        //      3.Number(变量)
+        //      4.利用 - * /  隐式转换
+        console.log('12' - 0);
+        // 4.4 转换为布尔型
+        //  Boolean()函数   其他类型转换成布尔值
+        //  代表空、否定的值会被转换为false，如''、0、NaN、null、undefined      其余值都会转换为true
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

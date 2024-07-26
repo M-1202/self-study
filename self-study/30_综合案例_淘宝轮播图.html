@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>淘宝轮播图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        li {
+            list-style: none;
+        }
+        .tb-promo {
+            position: relative;
+            width: 630px;
+            height: 315px;
+            margin: 100px auto;
+        }
+        .tb-promo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px 10px 10px 10px;
+        }
+        a {
+            text-decoration: none;
+        }
+        .prew {
+            /* 绝对定位 */
+            position: absolute;
+            left: 0;
+            /* 绝对定位的盒子垂直居中 */
+            top: 50%;
+            margin-top: -15px;
+            width: 20px;
+            height: 30px;
+            background-color: rgba(0, 0, 0, .3);
+            color: white;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 0 15px 15px 0;
+            /* 隐藏左箭头 */
+            opacity: 0;
+        }
+        .next {
+            /* 绝对定位 */
+            position: absolute;
+            right: 0;
+            /* 绝对定位的盒子垂直居中 */
+            top: 50%;
+            margin-top: -15px;
+            width: 20px;
+            height: 30px;
+            background-color: rgba(0, 0, 0, .3);
+            color: white;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 15px 0 0 15px;
+            /* 隐藏右箭头 */
+            opacity: 0;
+        }
+        /* 鼠标悬浮于盒子整体容器时，左箭头和右箭头显示 */
+        .tb-promo:hover .prew {
+            opacity: 1;
+        }
+        .tb-promo:hover .next {
+            opacity: 1;
+        }
+        /* 鼠标悬浮在左右箭头时，其背景颜色加深 */
+        .prew:hover,
+        .next:hover {
+            background-color: rgba(0, 0, 0, .6);
+        }
+        .promo-nav {
+            position: absolute;
+            left: 50%;
+            bottom: 15px;
+            margin-left: -35px;
+            width: 70px;
+            height: 13px;
+            background-color: rgba(255, 255, 255, .3);
+            border-radius: 10px;
+            /* text-align: center; */
+            /* line-height: 15px; */
+        }
+        .promo-nav li {
+            /* 小圆点左浮动 */
+            float: left;
+            width: 8px;
+            height: 8px;
+            background-color: #fff;
+            border-radius: 4px;
+            margin: 3px;
+        }
+        /* 清除浮动 */
+        .clearfix:after {
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+        .promo-nav .selected {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <!-- 盒子整体容器 -->
+    <div class="tb-promo">
+        <!-- 图片部分 -->
+        <img src="img/tb.jpg" alt="图片加载失败">
+        <!-- 左右箭头 -->
+        <a href="#" class="prew"> &lt; </a>
+        <a href="#" class="next"> &gt; </a>
+        <!-- 小圆点 -->
+        <a href="#">
+            <ul class="promo-nav clearfix">
+                <li class="selected"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </a>
+    </div>
+</body>
+</html>

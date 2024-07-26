@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表格隔行换色效果</title>
+    <style>
+        .bg{
+            background-color: pink;
+        }
+        /* tbody tr:hover {
+            background-color: blue;
+        } */
+    </style>
+</head>
+
+<body>
+    <table align="center" width="500" height="300" border="1" cellspacing="0">
+        <!-- 表格标题 -->
+        <caption>小说排行</caption>
+        <!-- 表格头部标签 -->
+        <thead>
+            <!-- 表头单元格 -->
+            <tr>
+                <th>排名</th>
+                <th>关键词</th>
+                <th>趋势</th>
+                <th>进入搜索</th>
+                <th>最近七日</th>
+                <th>相关链接</th>
+            </tr>
+        </thead>
+        <!-- 表格主体标签 -->
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>鬼吹灯</td>
+                <td>上升</td>
+                <td>123</td>
+                <td>456</td>
+                <td><a href="#">贴吧</a> <a href="#">图片</a> <a href="#">百科</a></td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>鬼吹灯</td>
+                <td>上升</td>
+                <td>123</td>
+                <td>456</td>
+                <td><a href="#">贴吧</a> <a href="#">图片</a> <a href="#">百科</a></td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>鬼吹灯</td>
+                <td>上升</td>
+                <td>123</td>
+                <td>456</td>
+                <td><a href="#">贴吧</a> <a href="#">图片</a> <a href="#">百科</a></td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>鬼吹灯</td>
+                <td>上升</td>
+                <td>123</td>
+                <td>456</td>
+                <td><a href="#">贴吧</a> <a href="#">图片</a> <a href="#">百科</a></td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>鬼吹灯</td>
+                <td>上升</td>
+                <td>123</td>
+                <td>456</td>
+                <td><a href="#">贴吧</a> <a href="#">图片</a> <a href="#">百科</a></td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>鬼吹灯</td>
+                <td>上升</td>
+                <td>123</td>
+                <td>456</td>
+                <td><a href="#">贴吧</a> <a href="#">图片</a> <a href="#">百科</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        // 1.获取元素 获取的是 tbody 里面所有的行
+        var trs = document.querySelector('tbody').querySelectorAll('tr');
+        // 2.利用循环绑定注册事件
+        for(var i = 0; i < trs.length; i++){
+            // 3. 鼠标经过事件 onmouseover
+            trs[i].onmouseover = function(){
+                this.className = 'bg';
+            }
+            // 4. 鼠标离开事件 onmouseout
+            trs[i].onmouseout = function(){
+                this.className = '';
+            }
+        }
+    </script>
+</body>
+
+</html>

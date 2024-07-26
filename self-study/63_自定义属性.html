@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义属性</title>
+</head>
+<body>
+    <div id="demo" index="1"></div>
+    <script>
+        var div = document.querySelector('div');
+        // 淘汰了
+        // 1. 获取元素的属性值
+        //    (1) element.属性
+        console.log(div.id);    // demo
+        //    (2) element.getAttribute('属性') get 得到获取 attribute 属性  我们程序员自己添加的属性我们称为自定义属性
+        console.log(div.getAttribute('id'));    // demo
+        console.log(div.getAttribute('index')); // 1
+        // 2. 设置元素属性值
+        //    (1) element.属性 = '值' 主要设置内置属性
+        div.id = 'test';
+        div.className = 'one';
+        //    (2) element.setAttribute('属性','值');  主要设置自定义属性
+        div.setAttribute('index',2); 
+        div.setAttribute('class','two');  // class特殊 这里面写的就是class 不是className
+        // 3. 移除属性 removeAttribute
+        div.removeAttribute('index');
+
+
+
+        //      在h5中推出了专门的 data- 自定义属性
+        //      在标签上一律以 data- 开头
+        //      在DOM对象上一律以 dataset 对象方式获取
+    </script>
+</body>
+</html>

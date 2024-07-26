@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axios使用</title>
+    <!-- 
+        Axios是一个基于promise的HTTP库，用于http请求，主要用于浏览器和node.js
+     -->
+</head>
+<body>
+    <p></p>
+    <!-- 
+        1. 引入axios库
+     -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
+    <script>
+        // 需求: 请求目标资源地址，拿到省份列表数据，显示到页面
+        // axios库地址: https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js
+        // 目标资源地址: http://hmajax.itheima.net/api/province
+
+        // 2. 调用axios函数
+        axios({
+            url:'http://hmajax.itheima.net/api/province'
+        }).then((result) => {
+            console.log(result)
+            console.log(result.data.list.join('<br>'))
+            document.querySelector('p').innerHTML = result.data.list.join('<br>')
+
+        })
+
+        // 
+    </script>
+</body>
+</html>

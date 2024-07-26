@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise静态方法</title>
+</head>
+
+<body>
+    <ul class="my-ul">
+        
+    </ul>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // 1. Promise.all()静态方法
+        /**
+         * 目标：掌握Promise.all()方法作用，和使用场景
+         * 业务：当我需要同一时间显示多个请求的结果时，就要把多请求合并
+         * 例如：默认显示"北京", "上海", "广州", "深圳"的天气在首页查看
+         * code：
+         * 北京-110100
+         * 上海-310100
+         * 广州-440100
+         * 深圳-440300
+        */
+        // 1. 请求城市天气，得到Promise对象
+        const clist = ['110100','310100','440100','440300']
+        // 遍历映射成一个 promise数组
+        const plist = clist.map(item => {
+            return axios({ url: 'http://hmajax.itheima.net/api/weather', params: { city: item } })
+        })
+        // console.log(plist)
+        // 2. 使用Promise.all，合并多个Promise对象
+        const p = Promise.all(plist)
+        console.log(p)
+        p.then(result => {
+            // 注意：结果数组顺序和合并时顺序是一致
+            console.log(result)
+            const liStr = result.map(item => {
+                return `<li>${item.data.data.area}--- ${item.data.data.weather}</li>`
+            }).join('')
+            document.querySelector('ul').innerHTML = liStr
+        }).catch(error => {
+            console.dir(error)
+        })
+    </script>
+</body>
+
+</html>

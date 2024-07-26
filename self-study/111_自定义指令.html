@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义指令</title>
+</head>
+<body>
+    <div id="App">
+        <input type="text" v-focus="firstName">
+        <h1>名:{{ lastName }}</h1>
+        <h2>当前n值:{{ n }}</h2>
+        <h2>放大10倍的n值:<span v-big="n"></span></h2>
+        <button @click="n++">n加1</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script>
+        // 2. 全局注册
+        // Vue.directive('focus',{
+        //     inserted(el){
+        //         el.focus()
+        //     }
+        // })
+
+        const vm = new Vue({
+            el: '#App',
+            data: {  
+                firstName: '张',
+                lastName: '三',
+                n:1
+            },
+            // 1. 局部注册
+            directives:{
+                focus:{
+                    // 钩子函数的参数:  ele:指令所绑定的DOM元素 binding:指令对象(存放指令的相关信息，其中value是指令的绑定值)
+
+                    // bind函数 只调用一次，指令第一次绑定到DOM元素时调用
+                    bind(ele,binding){
+                        console.log('只调用一次,指令第一次绑定到DOM元素时调用');
+                    },
+
+                    // inserted函数 被绑定元素插入父节点时调用
+                    inserted(ele){
+                        ele.focus()
+                    },
+
+                    // updated函数 指令所在的模板被重新解析时调用
+                    update(){
+                        console.log('指令所在的模板被重新解析时调用');
+                    }
+                },
+
+                // 当只需bind函数和update函数时  可用 函数式 简写
+                // big函数什么时候调用?
+                // 1. 指令第一次绑定到DOM元素时调用 2. 指令所在的模板被重新解析时调用
+                big(el,binding){
+                    el.innerHTML = binding.value * 10
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <button>获取json文件内容</button>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.querySelector('button').addEventListener('click',()=>{
+            axios({
+                url:'C:\Users\牟帅强\Desktop\html_bass\自学笔记\test.json'
+            }).then((result) => {
+                console.log(result)
+            })
+        })
+    </script> -->
+
+
+    <input type="file" id="testJsonFile" onchange="openFile(event)">
+
+    <!-- <script>
+
+        // 去重的函数
+        // function uniqueJsonArray(arr) {
+        //         const uniqueMap = new Map();
+        //         arr.forEach(item => {
+        //             uniqueMap.set(JSON.stringify(item), item);
+        //         });
+        //         return Array.from(uniqueMap.values());
+        //     }
+
+            // 示例用法
+            // const originalJsonArray = [
+            //     { id: 1, name: "Alice" },
+            //     { id: 2, name: "Bob" },
+            //     { id: 1, name: "Alice" }, // 重复数据
+            //     { id: 3, name: "Charlie" }
+            // ];
+            // const uniqueJsonResult = uniqueJsonArray(originalJsonArray);
+            // console.log(uniqueJsonResult);
+
+        // 获取到选中的文件
+        // const openFile = function(event){
+        //     const input = event.target
+        //     const reader = new FileReader()
+        //     reader.readAsText(input.files[0])
+        //     reader.onload = function(){
+        //         if(reader.result){
+        //             const data = JSON.parse(reader.result)
+                    
+        //             // console.log(data)
+        //             // 进行去重操作
+        //             // const uniqueData = uniqueJsonArray(data)
+        //             // 显示文件内容
+        //             // console.log(uniqueData)
+        //         }
+        //     }    
+        // }
+        
+
+    </script> -->
+
+    <h1>题库搜索</h1>
+    
+    <label for="search">请输入关键词：</label>
+    <input type="text" id="search" name="search">
+    <button onclick="search()">搜索</button>
+    
+    <div id="result"></div>
+    
+    <script>
+        
+        function search() {
+                var input = document.getElementById("search").value.toLowerCase();
+
+                const data = [{ "id": "4329", "title": "\u003cp\u003e渐进式增加运动阻力以逐渐超过先前肌肉训练负荷的过程叫做超负荷。一般性指导原则是每次增加阻力负荷的百分之多少？\u003c/p\u003e", "answer": [{ "options": "3%", "isCheck": false }, { "options": "5%", "isCheck": true }, { "options": "6%", "isCheck": false }, { "options": "8%", "isCheck": false }] }, { "id": "4706", "title": "一位教练正在与一位客户合作进行拉伸。 客户首先执行一个10秒的被动预拉伸，然后对抗私人教练的施力。 以下哪一项最能体现这种拉伸技巧？", "answer": [{ "options": "本体感受神经肌肉易化术（PNF）", "isCheck": true }, { "options": "肌筋膜放松", "isCheck": false }, { "options": "弹震式拉伸", "isCheck": false }, { "options": "动态伸展", "isCheck": false }] }, { "id": "4121", "title": "一位男性身高180cm，体重105kg，腰围95cm，他的疾病风险等级相应", "answer": [{ "options": "升高 ", "isCheck": false }, { "options": "中等 ", "isCheck": false }, { "options": "降低 ", "isCheck": true }, { "options": "极高", "isCheck": false }] }, { "id": "4114", "title": "一位20岁女性参加卷腹测试，测试结果完成了55次标准的卷腹，则她的成绩应该为", "answer": [{ "options": "极佳", "isCheck": true }, { "options": "良好", "isCheck": false }, { "options": "一般", "isCheck": false }, { "options": "不良", "isCheck": false }] }]
+
+                var result = document.getElementById("result");
+                result.innerHTML = ''; // 清空上一次的搜索结果
+
+                data.forEach(item => {
+                    if (item.title.toLowerCase().includes(input)) {
+                        var title = document.createElement("h3");
+                        title.textContent = item.title;
+
+                        var answer = document.createElement("p");
+                        answer.textContent = item.answer;
+
+                        result.appendChild(title);
+                        result.appendChild(answer);
+                    }
+                });
+
+                if (result.innerHTML === '') {
+                    result.textContent = '未找到相关题目。';
+                }
+            }
+
+        // 获取到选中的文件
+            // const openFile = function (event) {
+            //     const input = event.target
+            //     const reader = new FileReader()
+            //     reader.readAsText(input.files[0])
+            //     reader.onload = function () {
+            //         if (reader.result) {
+            //             const data = JSON.parse(reader.result)
+            //             console.log(data)
+
+                    
+            //             function search() {
+            //                 var input = document.getElementById("search").value.toLowerCase();
+
+
+
+            //                 var result = document.getElementById("result");
+            //                 result.innerHTML = ''; // 清空上一次的搜索结果
+
+            //                 data.forEach(item => {
+            //                     if (item.title.toLowerCase().includes(input)) {
+            //                         var title = document.createElement("h3");
+            //                         title.textContent = item.title;
+
+            //                         var answer = document.createElement("p");
+            //                         answer.textContent = item.answer;
+
+            //                         result.appendChild(title);
+            //                         result.appendChild(answer);
+            //                     }
+            //                 });
+
+            //                 if (result.innerHTML === '') {
+            //                     result.textContent = '未找到相关题目。';
+            //                 }
+            //             }
+            //         }
+            //     }
+            // } 
+                             
+
+    </script>
+
+</body>
+</html>

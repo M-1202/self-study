@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解构赋值</title>
+</head>
+
+<body>
+    <script>
+        // 1. 数组解构
+        // 把数组的单元值批量赋值给一系列变量
+        // const arr = [100,60,80]
+        // const [max,min,avg] = arr
+        // 可以写成
+        const [max, min, avg] = [100, 60, 80]
+
+        // 1.1 交换两个数变量
+        let a = 1
+        let b = 2;  // 必须加分号
+        [b, a] = [a, b]
+        console.log(a, b)  // 2,1
+        // 1.2 写一个冒泡排序  交换变量用数组结构
+        let arr = [2, 0, 9, 1, 7]
+        for (let i = 0; i < arr.length - 1; i++) {  // 外层循环控制趟数
+            for (let j = 0; j < arr.length - 1 - i; j++) {   // 内层循环控制一趟的次数
+                // 比较两者的大小 大的排在后面
+                if (arr[j] >= arr[j + 1]) {
+                    [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
+                }
+            }
+        }
+        console.log(arr)
+
+        // 2. 对象解构
+        // const {uname,age} = {uname:'小明',age:18}
+        // console.log(uname,age)  // 小明,18
+        // 2.1 变量名可以改名
+        const { uname: username, age } = { uname: '小明', age: 18 }
+        console.log(username, age)   // 小明 18
+        // 2.2 数组对象结构
+        const pig = [
+            {
+                uname: '佩奇',
+                age2: 5
+            }
+        ]
+        const [{ uname, age2 }] = pig
+        console.log(uname, age)  // 佩奇 18
+        // 2.3 多级对象解构
+        const people = {
+            name: '小王',
+            family: {
+                mother: '妈妈'
+            }
+        }
+        const { name, family: { mother } } = people
+        console.log(name, mother)    // 小王 妈妈
+        // 2.4 后台传过来的数据，选出data里面的数据进行渲染
+        const msg = {
+            "code": 200,
+            "data": [
+                {
+                    "id": 1,
+                    "color": "red"
+                },
+                {
+                    "id": 2,
+                    "color": "blue"
+                },
+                {
+                    "id": 3,
+                    "color": "green"
+                }
+            ]
+        }
+        // 需求1: 把data取出来
+        // const {data} = msg
+        // console.log(data)
+
+        // 需求2: 我们需要把data当作参数传递给一个函数
+        // 实参传递过来的时候顺便解构了
+        function render({ data }) {
+            // const {data} = msg
+            // 内部处理
+            console.log(data)
+        }
+        render(msg)
+
+        // 需求3: 把data数据存在myData中
+        function render({ data:myData }) {
+            // const {data} = msg
+            // 内部处理
+            console.log(myData)
+        }
+        render(msg)
+    </script>
+</body>
+
+</html>

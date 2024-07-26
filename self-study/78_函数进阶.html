@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数进阶</title>
+</head>
+
+<body>
+    <button>发送短信</button>
+    <script>
+        // 1. 函数参数
+        // 1.1 动态参数(arguments)  伪数组
+        function getSum1() {
+            let sum = 0
+            for (let i = 0; i < arguments.length; i++) {
+                sum += arguments[i]
+            }
+            return sum
+        }
+        console.log(getSum1(1, 2, 3, 4, 5))  // 15
+
+        // 1.2 剩余参数(...arr)    真数组  ...是展开运算符 用于获取多余的实参
+        function getSum2(a, b, ...arr) {
+            console.log(arr)    // [3,4,5]
+        }
+        getSum2(1, 2, 3, 4, 5)
+
+        // 1.3 展开运算符 ...
+        //     不会改变原数组/对象
+        // 求数组最值
+        const arr = [1, 23, 4]
+        console.log(...arr)     // 1 23 4
+        console.log(Math.max(...arr))   // 23
+        // 合并数组
+        const arr2 = [2, 3, 4]
+        console.log([...arr, ...arr2]) // [1,23,,4,2,3,4]
+
+        // 2. 箭头函数(ES6新增) 适用于那些本来需要匿名函数的地方
+        // 2.1 语法
+        // const fn = () => {}
+        // 只有一个形参 可以省略小括号
+        const f1 = x => { console.log(x) }
+        f1(123)    // 123
+        // 只有一行语句  可以省略大括号
+        const f2 = x => console.log(x)
+        f2(123)     // 123
+        // return后只有一行语句  可以再省略return
+        const f3 = x => x + x
+        console.log(f3(1))   // 2
+        // 可以直接返回对象
+        const f4 = (uname) => ({ uname: uname })
+        console.log(f4('刘德华'))   // {uname: '刘德华'}
+        // 返回数组
+        const f5 = (a, b, c) => [a, b, c]
+        console.log(f5(1, 2, 3))
+
+        // 2.2 参数 只有剩余参数
+        const getSum3 = (...arr) => {
+            let sum = 0
+            for (let i = 0; i < arr.length; i++) {
+                sum += arr[i]
+            }
+            return sum
+        }
+        console.log(getSum3(1, 2, 3))     // 6
+
+        // 2.3 箭头函数this指向
+        // 对象方法里的箭头函数this指向  window
+        // const obj = {
+        //     uname : '小明',
+        //     saiHi :  () =>console.log(this)
+        // }
+        // obj.saiHi()
+
+
+        // 构造函数中方法的箭头函数this指向  实例
+        // function Pig(name){
+        //     this.uname = name;
+        //     this.saiHi = () => console.log(this)
+        // }
+        // // 对象实例化
+        // const pig1 = new Pig('大猪')
+        // pig1.saiHi()
+
+        // function fn(){
+        //     const obj = {
+        //         uname: this,
+        //         saiHi: () => console.log(this)  // this 指向window  上一层作用域
+        //     }
+        //     obj.saiHi()
+        // }
+        // fn()
+
+
+        // JS对象{}中不存在作用域(除了方法) 方法作用域上一层作用域是全局作用域
+        // const age = 18
+        // const obj = {
+        //     age : 20,
+        //     saiHi : function(){
+        //         console.log(age)
+        //     }
+        // }
+        // // obj.saiHi()
+        // console.log(window.obj === obj);
+
+        // 3. 构造函数
+        //      创建一系列对象的模板函数    初始化对象
+        // 3.1 语法
+        function Pig(uname, age) {
+            this.uname = uname
+            this.age = age
+        }
+        const pig1 = new Pig('猪大', 8)
+
+        // 3.2 new 关键字执行过程
+        // (1) new 在内存中创建了一个空对象
+        // (2) this 就会指向刚才创建的空对象
+        // (3) 执行构造函数里面的代码 给这个空对象添加属性和方法
+        // (4) 返回这个对象(所以构造函数里不需要return)
+
+        // 3.3 实例成员/静态成员
+        // 实例成员: 实例对象的属性和方法
+        console.log(pig1.age)  // 8
+        // 静态成员: 构造函数独有的属性和方法   实例对象不能使用
+        // // 静态方法
+        Pig.sayHi = function (obj) {
+            console.log(obj.age)
+        }
+        // // 静态属性
+        Pig.eye = 2
+        const pig2 = new Pig('大猪', 5)
+        // pig1.sayHi()     实例对象不能调用
+        // 调用静态方法
+        Pig.sayHi(pig2)
+
+
+        // 4. 改变this指向
+        // 4.1 call()   了解
+        const obj = {
+            uname: 'pink'
+        }
+        function fn(x, y) {
+            console.log(this)
+            console.log(x + y)
+        }
+        // 1. 调用函数
+        // 2. 改变this指向
+        fn.call(obj, 1, 2)    // this指向obj
+
+        // 4.2 apply()
+        // 1. 调用函数
+        // 2. 改变this指向
+        fn.apply(obj, [1, 2])
+        // 求数组最值
+        const max = Math.max.apply(Math, [100, 2, 3, 4, 5])
+        console.log(max)
+
+        // 4.3 bind
+        const fn1 = fn.bind(obj, 1, 2)
+        fn1()
+        // 需求: 有一个按钮，点击立马禁用，2秒钟后开启
+        const btn = document.querySelector('button')
+        // 当使用 addEventListener() 为一个元素注册事件的时候，事件处理器里的 this 值是该元素的引用。
+        btn.addEventListener('click', function () {
+            // 是否禁用
+            this.disabled = true
+            setTimeout(function () {
+                // 我们要把this指向由原来的window改为btn
+
+                this.disabled = false
+            }.bind(this), 2000)
+        })
+
+        // 5. this指向
+        // 普通函数: 谁调用，this指向谁
+        // 箭头函数: 沿用上一层作用域的this
+        // 难点
+        // 回调函数的this指向
+        // 5.1 普通函数 谁调用 this指向谁
+        const obj2 = {
+            age: 100,
+            tool: function (callback) {
+                callback()
+                console.log(this, 111)   // obj
+            }
+        }
+        obj2.tool(function () {
+            console.log(this, 222)   // window
+        })
+
+        console.log('-------------------')
+        // 5.2 普通函数被调用时 改变this指向
+        const obj3 = {
+            age: 100,
+            tool: function (callback) {
+                callback.apply(this)
+                console.log(this, 111)   // obj
+            }
+        }
+        obj3.tool(function () {
+            console.log(this, 222)   // obj
+        })
+        console.log('--------------------')
+        // 5.3 箭头函数不会被改变this指向 忽略apply(this指向)的新this指向
+        const obj4 = {
+            age: 100,
+            tool: function (callback) {
+                callback.apply(this)
+                console.log(this, 111)   // obj
+            }
+        }
+        obj4.tool(() => {
+            console.log(this, 222)   // window
+        })
+        console.log('-----------------------------')
+        // 5.4 箭头函数的指向 是其所在作用域的this
+        const obj5 = {
+                age: 100,
+                tool: function (callback) {
+                    callback()
+                    console.log(this, 111)   // obj
+                }
+            }
+            obj5.tool(() => {
+                console.log(this, 222)   // window
+            })
+
+    </script>
+</body>
+
+</html>

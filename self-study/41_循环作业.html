@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>循环作业</title>
+    <script>
+        // 作业1 求1~100之间所有数的总和与平均值
+        var sum = 0;
+        for (var i = 1; i <= 100; i++) {
+            sum += i;
+        }
+        var average = sum / 100;
+        console.log(sum);
+        console.log(average);
+        // 作业2 求1~100之间所有偶数的和
+        var sum = 0;
+        for (var i = 1; i <= 100; i++) {
+            if (i % 2 != 0) {
+                continue;
+            }
+            sum += i;
+        }
+        console.log(sum);
+        // 作业3 求100以内7的倍数的总和
+        var sum = 0;
+        for (var i = 1; i <= 100; i++) {
+            if (i % 7 == 0) {
+                sum += i;
+            }
+        }
+        console.log(sum);
+        // 作业4 使用for循环打印m行n列矩形,要求每次只能输出一个★
+        var m = prompt('请输入打印几行的星星:');
+        var n = prompt('请输入打印几列的星星:');
+        var str = '';
+        for (var i = 1; i <= m; i++) {
+            for (var j = 1; j <= n; j++) {
+                str += '★';
+            }
+            str += '\n';
+        }
+        console.log(str);
+        // 作业5 使用for 循环打印m行正三角形
+        var str = '';
+        var m = prompt('请输入打印几行正三角形:');
+        for (var i = 1; i <= m; i++) {
+            for (var j = 1; j <= i; j++) {
+                str += '★';
+            }
+            console.log(str);
+            str = '';
+        }
+        // 作业6 使用for 循环打印九九乘法表
+        var str = '';
+        for (var i = 1; i <= 9; i++) {
+            for (var j = 1; j <= i; j++) {
+                str += j + '*' + i + '=' + i * j + '\t';
+            }
+            console.log(str);
+            str = '';
+        }
+        // 作业7 接收用户输入的用户名和密码,若用户名为'admin',密码为'123456',则提示用户登录成功! 否则,让用户一直输入(使用while循环)
+        var userName = prompt('请输入您的用户名:');
+        var password = prompt('请输入您的密码:');
+        while (userName != 'admin' || password != 123456) {
+            var userName = prompt('请输入您的用户名:');
+            var password = prompt('请输入您的密码:');
+        }
+        alert('用户登录成功!');
+        // 作业8 求整数1~100的累加值,但要求跳过所有个位为3的数(用continue实现)
+        var sum = 0;
+        for (var i = 1; i <= 100; i++) {
+            if (i % 10 == 3) {
+                continue;
+            }
+            sum += i;
+        }
+        console.log(sum);
+        // 作业9 简易ATM
+        // 1. 里面现存有100元
+        // 2. 如果存钱,就用输入钱数加上先存的钱数,之后弹出显示余额提示框
+        // 3. 如果取钱,就减去取的钱数,之后弹出显示余额提示框 如果取钱超过100元,则显示余额不足 并且重新输入
+        // 4. 如果显示余额,就输出余额
+        // 5. 如果退出,则弹出退出信息框
+        // 6. 如果输入格式不对(不是1 2 3 4),则提醒输入格式不对  并重新输入
+        // 可以定义一个变量 i 输入格式正确则i++不满足循环条件,退出循环  输入格式不正确时,i仍等于0满足循环条件 继续循环直到输入格式正确为止
+        var i = 0;              
+        while (i == 0) {
+            var option = parseInt(prompt('请输入您要的操作:' + '\n' + '\u0020' + '1.存钱' + '\n' + '\u0020' + '2.取钱' + '\n' + '\u0020' + '3.显示余额' + '\n' + '\u0020' + '4.退出'));
+            var yu = 100;
+            switch (option) {
+                case 1:
+                    var cun = parseInt(prompt('请您输入存钱的金额:'));
+                    yu += cun;
+                    alert('您现在的余额为:' + yu + '元');
+                    i++;
+                    break;
+                case 2:
+                    var qu = parseInt(prompt('请您输入取钱的金额:'));
+                    // 要考虑取的钱数大于余额的情况,提示余额不足，并重新输入
+                    while (qu > 100) {
+                        alert('您的余额不足!')
+                        qu = parseInt(prompt('请您重新输入取钱的金额:'));
+                    }
+                    yu -= qu;
+                    alert('您现在的余额为:' + yu + '元');
+                    i++;
+                    break;
+                case 3:
+                    alert('您现在的余额为:' + yu + '元');
+                    i++;
+                    break;
+                case 4:
+                    alert('您正在退出!');
+                    i++;
+                    break;
+                default:
+                    alert('输入格式有误，请您重新输入');
+            }
+        }
+        // 作业10 计算两个数之间的质数，并打印出来
+            var start = prompt('请您输入起始数:');
+            var end = prompt('请您输入终止数:');
+            for (var i = start; i <= end; i++) {
+                var zhishu = true;
+                if (i == 1) {
+                    zhishu = false;
+                } else {
+                    for (var j = 2; j <= Math.sqrt(i); j++) {
+                        if (i % j == 0) {
+                            zhishu = false;
+                            break;
+                        }
+                    }
+                }
+                if (zhishu) {
+                    console.log(i);
+                }
+            }
+        // 椰子汁5元一瓶，4个盖子可以换一瓶椰子汁，3个空瓶可以换一瓶椰子汁，那么100块钱可以喝多少瓶椰子汁，剩下瓶盖和空瓶各多少？
+            var money = 100;
+            var sum = money / 5;
+            // 起初盖子和空瓶等于买来的椰子汁瓶数
+            var gai = kong = sum;
+            while (gai >= 4 || kong >= 3) {
+                var ping1 = parseInt(gai / 4);
+                var yugai = parseInt(gai % 4);
+                var ping2 = parseInt(kong / 3);
+                var yukong = parseInt(kong % 3);
+                var ping = ping1 + ping2;
+                gai = ping + yugai;
+                kong = ping + yukong;
+                sum += ping;
+            }
+            console.log('100块钱可以喝' + sum + '瓶椰子汁');
+            // 最后一次循环的 gai 为最终剩下的瓶盖
+            console.log('剩下' + gai + '个瓶盖');
+            // 最后一次循环的 kong 为最终剩下的空瓶
+            console.log('剩下' + kong + '个空瓶');
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

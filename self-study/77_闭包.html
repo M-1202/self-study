@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>闭包</title>
+</head>
+
+<body>
+    <script>
+        // 闭包 = 内层函数 + 外层函数的变量
+        // 1. 闭包的作用: 外部可以访问函数内部的变量 实现数据的私有化
+        // 统计一个函数被调用的次数
+        function outer() {
+            let i = 0
+            function fn() {
+                i++
+                console.log(`函数被调用了${i}次`)
+            }
+            return fn
+        }
+        const fun = outer()
+        fun()   // 1
+        fun()   // 2
+        let i = 1000
+        fun()   // 3    不会被全局变量污染
+
+        // 闭包还可以封装对象的私有属性
+        // 正常情况下对象的属性会被随意修改  我们需要把对象的数据私有化
+        // function Man(){
+        //     this.eye = 2
+        // }
+        // const p1 = new Man()
+        // console.log(p1.eye)     // 2
+        // p1.eye = 3
+        // console.log(p1.eye)     // 3
+
+        // 使用闭包实现数据私有化 (1)
+        // function Man() {
+        //     // 1. 先在外函数定义属性
+        //     let eye
+        //     // 2. 通过对象的方法进行属性的赋值
+        //     function setEye(n){
+        //         eye = n
+        //     }
+        //     function getEye(){
+        //         return eye
+        //     }
+        //     // 3. 返回一个对象  里面有set和get方法  可以单独设置
+        //     return{
+        //         setEye: setEye,
+        //         getEye: getEye
+        //     }
+        // }
+        // const p1 = Man()
+        // p1.setEye(2)
+        // console.log(p1.getEye())
+        // console.log(p1.eye) // undefined
+        // p1.setEye(3)
+        // console.log(p1.getEye())
+
+        // (2)  用闭包保存私有属性，再将它存放在对象方法中 这样在外面调用方法可以访问私有属性
+        function Man(eye) {
+            let eye_ = eye
+            // 可以通过实例化的时候进行赋值，也可以通过set方法进行赋值
+            this.setEye = (eye) => {
+                eye_ = eye
+            }
+            this.getEye = () => {
+                return eye_
+            }
+        }
+        // 实例化对象里有set和get两个方法
+        const p1 = new Man()
+        console.log(p1)
+        p1.setEye(2)
+        console.log(p1.getEye())    // 2
+        console.log(p1.eye)     // undefined
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>非单文件组件</title>
+</head>
+<body>
+    <div id="root">
+        <h2>姓:{{ firstName }}</h2>
+        <h2>名:{{ lastName }}</h2>
+        <!-- <APP></APP> -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script>
+        // 1. 创建school组件
+        const school = Vue.extend({
+            data(){
+                return{
+                    name: '小明'
+                }
+            },
+            template:`
+                <h1>{{ name }}</h1>
+            `
+        })
+
+        const App = Vue.extend({
+            // 3. 使用school组件
+            template:`
+                <school></school>
+            `,
+            // 2. 注册school组件
+            components:{
+                school
+            }
+        })
+        const vm = new Vue({
+            el: '#root',
+            data: {  
+                firstName: '张',
+                lastName: '三',
+            },
+            // 此时App会覆盖root结构
+            template:`
+                <App></App>
+            `,
+            components:{
+                App
+            }
+        })
+    </script>
+</body>
+</html>

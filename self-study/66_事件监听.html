@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件监听</title>
+    <!-- 
+        <什么是事件>
+            事件是在编程时系统内发生的动作或者发生的事情。比如，用户在网页上点击一个按钮
+        <什么是事件监听>
+            就是让程序检测是否有事件发生，一旦有事件触发，就立即调用一个函数做出响应，也称为绑定事件或者注册事件
+        <回调函数>
+            如果将函数A作为参数传递给函数B时，我们称函数A为回调函数
+            注意: 1.回调函数本质还是函数，只是把它当参数来用
+                  2.使用匿名函数作为回调函数比较常见
+        1. 语法:    元素对象.addEventListener('事件类型',要执行的函数(这里的函数叫做回调函数))
+        2. 事件三要素: 
+            ① 事件源: 事件被触发的对象  谁(who)
+            ② 事件类型: 触发的条件 如何触发(how)
+            ③ 事件处理程序: 调用一个函数做出响应    要做什么事(what)
+        3. 事件类型
+            ① 鼠标事件  鼠标触发
+                click 鼠标点击
+                mouseenter 鼠标经过
+                mouseleave 鼠标离开
+            ② 焦点事件  表单获得光标
+                focus 获得焦点
+                blur 失去焦点
+            ③ 键盘事件
+                keydown 键盘按下触发
+                keyup 键盘抬起触发
+            ④ 文本事件  表单输入触发
+                input 用户输入事件
+     -->
+    <style>
+        /* input {
+            background-color: red;
+        } */
+    </style>
+</head>
+<body>
+    <button>按钮1</button>
+    <input type="text">
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <script>
+        // 鼠标事件
+        // 1. 获取按钮对象
+        const btn = document.querySelector('button')
+        // 2. 给按钮注册事件
+        btn.addEventListener('click',function() {
+            alert('鼠标点击事件')
+        })
+
+
+        // 焦点事件
+        // 1. 获取表单对象
+        const input = document.querySelector('input')
+        // 2. 注册事件
+        input.addEventListener('focus',function() {
+            input.style.backgroundColor = 'red'
+        })
+
+        // 键盘事件
+        // 1. 获取 表单域 对象
+        const txt = document.querySelector('textarea')
+        // 2. 注册键盘事件
+        txt.addEventListener('keyup',function() {
+            alert('键盘抬起了')
+        })
+        // 文本事件
+        input.addEventListener('input',function(){
+            console.log(input.value);
+        })
+    </script>
+</body>
+</html>

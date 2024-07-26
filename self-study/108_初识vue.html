@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初识Vue</title>
+</head>
+
+<body>
+    <div id="App">
+        <!-- 插值语法 -->
+        <h1>年龄: {{ age }}</h1>
+        <!-- v-html指令 -->
+        <p v-html="strong"></p>
+        <!-- v-show  频繁使用时推荐-->
+        <!-- 该元素一直被渲染到HTML上，通过控制 display: none 来显示元素 -->
+        <p v-show='flag1'>只有v-show的值为true时,我才显示</p>
+        <!-- v-if  次数少时推荐-->
+        <!-- 该元素满足条件时渲染，通过操作DOM元素来显示元素 -->
+        <p v-if="flag2">只有v-if的值为true时,我才显示</p>
+        <!-- v-on(@) -->
+        <button @click="count++">按钮一{{count}}</button>
+        <button @click="multiply">按钮二{{ count }}</button>
+        <!-- v-for 列表渲染 -->
+        <ul>
+            <li v-for = "(item,index) in list" :key = "item.id">
+                <span>{{ item.name }}</span>
+                <button @click = "del(item.id)">删除</button>
+            </li>
+        </ul>
+        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#App',
+            data: {
+                age: 18,
+                strong: '<strong>123</strong>',
+                flag1: false,
+                flag2: true,
+                count: 0,
+                list: [
+                    { id: 1, name: '西游记' },
+                    { id: 2, name: '水浒传' },
+                    { id: 3, name: '三国演义' },
+                    { id: 4, name: '红楼梦' }
+                ]
+            },
+            methods: {
+                multiply() {
+                    this.count *= 2
+                },
+                del(id){
+                    this.list = this.list.filter(item => item.id !== id)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

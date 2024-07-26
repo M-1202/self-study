@@ -1,0 +1,33 @@
+.footer {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #e0e0e0;
+}
+/* after伪元素清除浮动 */
+.clearfix::after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.left {
+    float: left;
+    width: 47%;
+    padding: 7px;
+}
+.left img {
+    width: 50px;
+    float: right;
+    margin: 5px;
+}
+.right {
+    float: left;
+    width: 47%;
+    padding: 10px;
+    border-left:1px solid #c3c3c3 ;
+}
+.right img {
+    width: 100px;
+    margin: 5px 0;
+}

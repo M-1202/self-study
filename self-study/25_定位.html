@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定位</title>
+    <!-- 
+        <定位组成>
+        定位: 将盒子定在某一个位置,所以定位也是在摆放盒子,按照定位的方式移动盒子
+        定位 = 定位模式 + 边偏移
+        定位模式 用于指定一个元素在文档中的定位方式
+        边偏移 则决定了该元素的最终位置
+        <定位模式>
+        定位模式决定元素的定位方式,它通过css的position属性来设置,其值可以分为四个:
+        1. static        静态定位  (了解)
+        静态定位是元素的默认定位方式,无定位的意思
+        语法:  选择器 {position: static;}
+        注意: ①静态定位按照标准流特性摆放位置,它没有边偏移  ②静态定位在布局时很少用到 
+        2. relative      相对定位  (重要)
+        相对定位是元素在移动位置的时候,是相对于它原来的位置来说的(自恋型)
+        语法:  选择器 {position: relative}
+        特点:
+        ①它是相对于自己原来的位置来移动的(移动位置的时候参照点是它自己原来的位置)
+        ②原来在标准流的位置继续占有,后面的盒子仍然以标准流的方式对待它(不脱标,继续保留原来位置)
+        因此,相对定位并没有脱标,它最典型的应用就是给绝对定位当爹的
+        3. absolute      绝对定位 (重要)
+        绝对定位是元素在移动位置的时候,是相对于它祖先元素来说的(拼爹型)
+        语法: 选择器 {position: absolute;}
+        特点:
+        ①如果没有祖先元素或者祖先元素没有定位,则以浏览器为准定位(Document文档)
+        ②如果祖先元素有定位(相对、绝对、固定),则以最近一级的有定位祖先元素为参考点移动位置
+        ③绝对定位不再占有原先的位置(脱标)
+        4. fixed         固定定位  (重要)
+        固定定位是元素固定于浏览器可视区的位置。主要使用场景:可以在浏览器页面滚动时元素的位置不会改变
+        语法:  选择器 {position: fixed;}
+        特点:
+        ①以浏览器的可视窗口为参考点移动元素
+         跟父元素没有任何关系
+         不随滚动条滚动
+        ②固定定位不占有原先的位置(脱标)  固定定位也是脱标的,其实固定定位也可以看作是一种特殊的绝对定位
+        固定定位小技巧:固定在版心右侧位置
+        小算法:
+        ①让固定定位的盒子left:50% 走到浏览器可视区(版心)的一半距离
+        ②让固定定位的盒子margin-left: 版心宽度的一半距离。就可以让固定定位的盒子贴着版心右侧对齐了 
+        5. sticky        粘性定位   (了解)
+        粘性定位可以被认为是相对定位和固定定位的混合
+        语法: 选择器 {position: sticky; }
+        特点:
+        ①以浏览器的可视窗口为参照点移动元素(固定定位特点)
+        ②粘性定位占有原先的位置(相对定位特点)
+        ③必须添加top、left、right、bottom其中一个才有效
+        <边偏移>     (相对于父元素偏移)
+        边偏移就是定位的盒子移动到最终位置。有top、bottom、left、right四个属性
+     -->
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+        .one {
+            position: relative;
+            top: 100px;
+            left: 100px;
+            width: 400px;
+            background-color: red;
+        }
+        .father {
+            display: inline-block;
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            /* opacity: 0;    消失,还占有原本位置 */
+            /* visibility: hidden;  消失,还占有原本位置*/
+            /* display: none;  消失,不占有原本位置*/
+        }
+        .son {
+            position: absolute;
+            top:0;
+            left: 100px;
+            width: 100px;
+            height: 100px;
+            background-color: purple;
+        }
+        .a {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background-color: brown;
+        }
+        .heart {
+            width: 800px;
+            height: 1500px;
+            margin: 0 auto;
+            background-color: hotpink;
+        }
+        .b {
+            position: fixed;
+            /* 1.走浏览器宽度的一半 */
+            left: 50%;
+            /*2.利用margin走版心盒子宽度的一半*/
+            margin-left: 400px; 
+            width: 50px;
+            height: 100px;
+            background-color: brown;
+        }
+        .nav {
+            position: sticky;
+            /* 当该盒子与可视区域的上方空隙为0时,该盒子不会随着滚动条而滚动(即此时变成固定定位) */
+            top: 0;
+            width: 900px;
+            height: 50px;
+            margin: 0 auto;
+            background-color: skyblue;
+        }
+        .m {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box one">相对定位</div>
+    <div class="box two">标准流</div>
+    <div class="father">父相
+        <div class="son">子绝</div>
+    </div>
+    <div class="nav">粘性定位</div>
+    <div class="a">固定定位</div>
+    <div class="b">固定版心右侧</div>
+    <div class="heart">版心位置</div>
+    <div class="m">没有父级定位的绝对定位是以浏览器为参照点的</div>
+</body>
+</html>
