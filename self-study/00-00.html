@@ -1,533 +1,61 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <style>
-        /* CSS样式 */
-        body {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-        }
-
-        header {
-            background-color: #f1f1f1;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 18px;
-            font-weight: normal;
-        }
-
-        header .nav {
-            display: flex;
-            gap: 10px;
-        }
-
-        header .nav a {
-            color: #333;
-            text-decoration: none;
-        }
-
-        header .nav a.active {
-            color: #007bff;
-        }
-
-        aside {
-            width: 200px;
-            float: left;
-            padding: 20px;
-            background-color: #f1f1f1;
-        }
-
-        aside ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        aside ul li {
-            padding: 10px 0;
-            border-bottom: 1px solid #ccc;
-        }
-
-        aside ul li a {
-            display: block;
-            color: #666;
-            text-decoration: none;
-        }
-
-        aside ul li a:hover {
-            background-color: #ebebeb;
-        }
-
-        main {
-            margin-left: 220px;
-            padding: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
-
-        button {
-            margin-right: 5px;
-            padding: 5px 10px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .pagination a {
-            color: black;
-            padding: 8px 16px;
-            text-decoration: none;
-            border: 1px solid #ddd;
-        }
-
-        .pagination a.active {
-            background-color: #4CAF50;
-            color: white;
-            border: 1px solid #4CAF50;
-        }
-    </style> -->
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
-    <style>
-        /* CSS样式 */
-        /* 初始化样式 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: PingFang SC;
-            list-style-type: none;
-            text-decoration: none;
-        }
-
-    
-        header {
-            position: absolute;
-            top: 0;
-            left: 200px;
-            width: 1719px;
-            height: 64px;
-            background: #FFFFFF;
-            /* 阴影/低阴影 */
-            box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.16);
-        }
-    
-        header p {
-            margin-left: 23px;
-            margin-top: 16px;
-            width: 90px;
-            height: 32px;
-            font-size: 18px;
-            font-weight: 500;
-            line-height: 32px;
-        }
-    
-        aside {
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            width: 200px;
-            height: 1080px;
-            border-right: 1px solid rgba(216, 216, 216, 0.5);
-            background: #FFFFFF;
-        }
-
-        aside .title {
-            width: 100%;
-            height: 64px;
-            display: flex;
-            justify-content: center; /* 水平居中 */
-            align-items: center; /* 垂直居中 */
-        }
-
-        aside .title p {
-            font-size: 18px;
-            font-weight: 500;
-            line-height: 32px;
-        }
-
-        aside .nav-one {
-            width: 100%;
-            height: 40px;
-            background: rgba(53, 140, 247, 0.1);
-            display: flow-root; /* 创建BFC */
-        }
-        aside .nav-one p {
-            margin: 9px 0 9px 46px;
-            font-size: 14px;
-            line-height: 22px;
-            font-weight: 500;
-            color: #2E74FF;
-        }
-
-        aside .nav-two {
-            width: 100%;
-            height: 66px;
-            display: flow-root; /* 创建BFC */
-        }
-        aside .nav-two p {
-            margin: 22px 0 22px 46px;
-            font-size: 14px;
-            line-height: 22px;
-            font-weight: normal;
-        }
-    
-        aside .ul-one {
-            margin-top: 9px;
-            width: 100%;
-            height: 200px;
-        }
-
-        aside .ul-two {
-            margin-top: 572px;
-            width: 100%;
-            height: 83px;
-        }
-    
-        aside .ul-one li,
-        aside .ul-two li {
-            padding-left: 46px;
-            height: 40px;
-        }
-    
-        aside .ul-one li a,
-        aside .ul-two li a {
-            display: block;
-            font-size: 14px;
-            line-height: 22px;
-            font-weight: normal;
-            color: rgba(0, 0, 0, 0.7);
-            padding: 9px 0;
-        }
-    
-        main {
-            width: 1672px;
-            height: 968px;
-            background: #FFFFFF;
-            position: absolute;
-            top: 64px;
-            left: 200px;
-            margin-top: 24px;
-            margin-left: 24px;
-        }
-        main .tabs {
-            display: flex;
-            height: 47px;
-            margin-left: 13px;
-            border-bottom: 1px solid rgba(216, 216, 216, 0.5);
-        }
-        main .tabs a{
-            display: block;
-            margin: 24px 0 9px 26px;
-            font-size: 14px;
-            font-weight: normal;
-            line-height: 14px;
-            letter-spacing: 0.56px;
-            color: #31373D;
-        }
-
-        .form {
-            width: 100%;
-            height: 32px;
-            margin: 16px 24px;
-        }
-        .form input {
-            width: 190px;
-            height: 100%;
-            margin-right: 26px;
-            border-radius: 2px;
-            border: 1px solid rgba(212, 214, 217, 0.7);
-        }
-        .form button{
-            height: 100%;
-            border-radius: 2px;
-            background: #1677FF;
-            font-size: 14px;
-            font-weight: normal;
-            line-height: 22px;
-            color: #FFFFFF;
-            cursor: pointer;
-        }
-    
-        table {
-            width: 100%;
-            margin: 16px 24px;
-            border-collapse: collapse;
-        }
-    
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            padding-left: 26px;
-            text-align: left;
-            line-height: 22px;
-            font-size: 14px;
-            color: rgba(0, 0, 0, 0.7);
-        }
-    
-        th {
-            background-color: #f2f2f2;
-            font-weight: 500;
-        }
-        td {
-            font-weight: normal;
-        }
-    
-        button {
-            margin-right: 5px;
-            padding: 5px 10px;
-            border: none;
-            cursor: pointer;
-        }
-    
-        .pagination {
-            position: absolute;
-            right: 24px;
-            bottom: 24px;
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-    
-        .pagination a {
-            color: black;
-            padding: 8px 16px;
-            text-decoration: none;
-            border: 1px solid #ddd;
-        }
-    
-        .pagination a.active {
-            background-color: #4CAF50;
-            color: white;
-            border: 1px solid #4CAF50;
-        }
-
-    .modal {
-      display: none;
-      position: absolute;
-      top: 323px;
-      bottom: 323px;
-      left: 670px;
-      right: 670px;
-      width: 580px;
-      height: 435px;
-      background-color: white;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      padding: 20px;
-    }
-
-    .modal h2 {
-      margin-top: 0;
-      margin-bottom: 10px;
-    }
-
-    .modal input[type="text"],
-    .modal input[type="email"] {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-
-    }
-
-    .modal button {
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-right: 5px;
-    }
-
-    .modal button:last-child {
-      background-color: #ddd;
-      color: black;
-    }
-    </style>
 </head>
 
 <body>
-    <!-- 顶部导航栏 -->
-    <header>
-        <p>我的工作台</p>
-    </header>
+    <button class='up'>销量升序</button>
+    <button class='down'>销量降序</button>
+    <ul></ul>
 
-    <!-- 左侧菜单 -->
-    <aside>
-        <div class="title">
-            <p>科研项目管理</p>
-        </div>
-        <div class="nav-one">
-            <p>我的工作台</p>
-        </div>
-        <div class="nav-two">
-            <p>通知</p>
-        </div>
-        <hr style="width: 158px; margin: auto;">
-        <ul class="ul-one">
-            <li style="background: #F1F1F1;"><a href="#">项目配置</a></li>
-            <li><a href="#">项目策划</a></li>
-            <li><a href="#">项目计划</a></li>
-            <li><a href="#">模板管理</a></li>
-            <li><a href="#">资源管理</a></li>
-        </ul>
-        <ul class="ul-two">
-            <li><a href="#">系统管理</a></li>
-            <li><a href="#">帮助中心</a></li>
-            <li><a href="#">赵某某</a></li>
-        </ul>
-    </aside>
-
-    <!-- 主体内容区域 -->
-    <main>
-        <div class="tabs">
-            <a href="#" style="color: #1677FF;">全部项目</a>
-            <a href="#">未开始</a>
-            <a href="#">进行中</a>
-            <a href="#">已完成</a>
-        </div>
-        <form class="form">
-            <input type="text" placeholder="请选择项目">
-            <input type="text" placeholder="请选择负责人" style="width: 130px;">
-            <input type="text" placeholder="请选择企业">
-            <input type="date" placeholder="请输入日期">
-            <input type="text" placeholder="请输入关键字" style="margin-right: 6px;">
-            <button type="button" style="margin-right: 456px;">查询</button>
-            <button type="button" class="add" style="display: inline-block;">添加项目</button>
-            <button type="button" style="background: #FF8989;">删除</button>
-        </form>
-        <table>
-            <thead>
-                <tr>
-                    <th>序号</th>
-                    <th>项目名称</th>
-                    <th>企业名称</th>
-                    <th>地区</th>
-                    <th>负责人</th>
-                    <th>手机号码</th>
-                    <th>邮箱</th>
-                    <th>开始日期</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>XXXXXX项目</td>
-                    <td>中国石油化工股份有限公司</td>
-                    <td>仙桃市</td>
-                    <td>吴美隆</td>
-                    <td>18268559855</td>
-                    <td>d384@eyou.com</td>
-                    <td>2022-06-27 12:36:12</td>
-                    <td>
-                        <button style="background: #FFFFFF; color: #2E74FF">修改</button>
-                        <button style="background: #FFFFFF; color: #FF8989">删除</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>XXX项目</td>
-                    <td>中国平安保险(集团)股份有限公司</td>
-                    <td>北京市</td>
-                    <td>黄丽昆</td>
-                    <td>13991958888</td>
-                    <td>fiv@eastday.com</td>
-                    <td>2022-07-16 16:43:32</td>
-                    <td>
-                        <button style="background: #FFFFFF; color: #2E74FF">修改</button>
-                        <button style="background: #FFFFFF; color: #FF8989">删除</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>XXXXXXXXXXXXXXXXX项目</td>
-                    <td>中国中铁股份有限公司</td>
-                    <td>深圳市</td>
-                    <td>丁汉臻</td>
-                    <td>15300002222</td>
-                    <td>p512132@263.net</td>
-                    <td>2022-09-16 16:25:42</td>
-                    <td>
-                        <button style="background: #FFFFFF; color: #2E74FF">修改</button>
-                        <button style="background: #FFFFFF; color: #FF8989">删除</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <!-- 分页器 -->
-        <div class="pagination">
-            <a href="#">&laquo;</a>
-            <a href="#">
-            <a href="#">1</a>
-            <a href="#" class="active">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">6</a>
-            <a href="#">7</a>
-            <a href="#">&raquo;</a>
-        </div>
-    </main>
-                        
-    <!-- 弹窗 -->
-    <div class="modal">
-        <h2>添加项目</h2>
-        <form>
-            <input type="text" placeholder="项目名称:" />
-            <input type="text" placeholder="企业名称:" />
-            <input type="text" placeholder="所处地区:" />
-            <input type="text" placeholder="负责人:" />
-            <input type="text" placeholder="手机号码:" />
-            <input type="email" placeholder="电子邮件:" />
-            <input type="date" placeholder="开始日期:" />
-            <button class="yes">确定</button>
-            <button class="no">取消</button>
-        </form>
-    </div>
-    <script>
-        const add = document.querySelector('.add');
-        const modal = document.querySelector('.modal');
-        // const no = document.querySelector('.no');
-        add.addEventListener('click', () => {
-            modal.style.display = 'block';
-        })
-        // no.addEventListener('click', () => {
-        //     modal.style.display = 'none';
-        // })
-    </script>
+    <!-- <script>
+        var cups = [
+            { type: 1, price: 100, color: 'black', sales: 3000, name: '牛客logo马克杯' },
+            { type: 2, price: 40, color: 'blue', sales: 1000, name: '无盖星空杯' },
+            { type: 4, price: 60, color: 'green', sales: 200, name: '老式茶杯' },
+            { type: 3, price: 50, color: 'green', sales: 600, name: '欧式印花杯' }
+        ]
+        var ul = document.querySelector('ul');
+        var upbtn = document.querySelector('.up');
+        var downbtn = document.querySelector('.down');
+        // 补全代码
+        // 封装一个数组升序降序的函数
+        function arrSort(arr, type) {
+            let salesArr = arr.map(item => item.sales)
+            if (type === '1') {
+                salesArr.sort((a, b) => a - b)
+            } else {
+                salesArr.sort((a, b) => b - a)
+            }
+            return salesArr.map(item => cups.find(cup => cup.sales === item)).map(item => item.name)
+        }
+        // 给升序按钮添加点击事件
+        upbtn.onclick = () => {
+            let res = arrSort(cups, '1')
+            res.forEach(item => {
+                // 创建li元素
+                let li = document.createElement("li")
+                // 给li元素添加内容
+                li.innerHTML = item
+                // 追加给ul
+                ul.appendChild(li)
+            })
+        }
+        // 给降序按钮添加点击事件
+        downbtn.onclick = () => {
+            let res = arrSort(cups, '0')
+            res.forEach(item => {
+                // 创建li元素
+                let li = document.createElement("li")
+                // 给li元素添加内容
+                li.innerHTML = item
+                // 追加给ul
+                ul.appendChild(li)
+            })
+        }
+    </script> -->
 </body>
-                        
+
 </html>
